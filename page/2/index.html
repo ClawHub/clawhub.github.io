@@ -1,0 +1,319 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>ClawHub的技术分享 - 好好学习 天天向上</title><meta name="author" content="ClawHub"><meta name="copyright" content="ClawHub"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="ClawHub的技术分享，记录学习中的点点滴滴！">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ClawHub的技术分享">
+<meta property="og:url" content="https://clawhub.github.io/page/2/index.html">
+<meta property="og:site_name" content="ClawHub的技术分享">
+<meta property="og:description" content="ClawHub的技术分享，记录学习中的点点滴滴！">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/clawhub/image/blog/avatar.gif">
+<meta property="article:author" content="ClawHub">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/clawhub/image/blog/avatar.gif"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/clawhub/image/blog/favicon-32x32-clawhub.png"><link rel="canonical" href="https://clawhub.github.io/page/2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"GOOBOT5XB8","apiKey":"68084d3bd15b2455050d3030780a5821","indexName":"clawhub-blog-search","hits":{"per_page":6},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'ClawHub的技术分享',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-09-27 15:16:25'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/clawhub/image/blog/avatar.gif" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">331</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">35</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">35</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/clawhub/image/diffuser/blog/19/11/30/e1eb1cc50aa0a5a2fcdbf929152dbbef.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="ClawHub的技术分享"><span class="site-name">ClawHub的技术分享</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">ClawHub的技术分享</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/clawhub" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:clawhub@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left"><a href="/2019/12/24/JVM/JVM%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" title="JVM内存区域与垃圾回收"><img class="post-bg" src="https://cdn.jsdelivr.net/gh/clawhub/image/diffuser/top/19/11/28/7f42a311ed90aa88c3ad2f488d44efac.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JVM内存区域与垃圾回收"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/12/24/JVM/JVM%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" title="JVM内存区域与垃圾回收">JVM内存区域与垃圾回收</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-12-24T12:49:23.000Z" title="发表于 2019-12-24 20:49:23">2019-12-24</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/JVM/">JVM</a></span></div><div class="content">1、JAVA内存区域与内存溢出1.1、概述Java中JVM提供了内存管理机制，Java虚拟机在执行Java程序的过程中会把内存分为不同的数据区,如图:
+1.2、程序计数器程序计数器是当前线程所执行的字节码的行号指示器，作用就是根据计数器的值获取下一条要执行的字节码指令。当执行的是java方法，则记录的是正在执行的虚拟机字节码指令的地址，如果是Native方法，则这个计数器的值为空。不存在任何OutOfMemoryError。
+1.3、虚拟机栈每个普通Java方法（除去Native方法）在执行的时候都会同时创建栈帧，用于存储局部变量表、操作栈、动态链接、方法出口等信息，每个方法被调用直到完成的过程对应着栈帧在JVM栈中的入栈与出栈。其中局部变量表所需要的内存空间在编译器间完成分配。
+跟虚拟机栈相关联的异常有两种：
+
+StackOverflowError
+
+线程请求的栈深度大于虚拟机允许的最大深度。
+
+OutOfMemoryError
+
+虚拟机栈扩展时无法申请到足够的内存。
+1.4、本地方法栈用于虚拟机执行Native方法，其他和本地方法栈相同。也会有StackOverflowError和 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2019/12/18/%E9%AB%98%E5%B9%B6%E5%8F%91/%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97%E4%B9%8BLinkedBlockingQueue%E5%88%86%E6%9E%90/" title="阻塞队列之LinkedBlockingQueue分析"><img class="post-bg" src="https://cdn.jsdelivr.net/gh/clawhub/image/diffuser/top/19/11/27/2e914990e5a78473a36aa49d69399ef0.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="阻塞队列之LinkedBlockingQueue分析"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/12/18/%E9%AB%98%E5%B9%B6%E5%8F%91/%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97%E4%B9%8BLinkedBlockingQueue%E5%88%86%E6%9E%90/" title="阻塞队列之LinkedBlockingQueue分析">阻塞队列之LinkedBlockingQueue分析</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-12-18T10:10:59.000Z" title="发表于 2019-12-18 18:10:59">2019-12-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E9%AB%98%E5%B9%B6%E5%8F%91/">高并发</a></span></div><div class="content">1、五种阻塞队列介绍
+ArrayBlockingQueue有界队列，底层使用数组实现，并发控制使用ReentrantLock控制，不管是插入操作还是读取操作，都需要获取锁之后才能执行。
+LinkedBlockingQueue底层基于单向链表实现，既可以当做有界队列，也可以当做无界队列使用。使用两个ReentrantLock实现并发控制:takelock和putlock。
+SynchronousQueue底层使用单向链表实现，只有一个元素，同步的意思是一个写操作必须等到一个读操作之后才返回，指的是读写线程的同步。
+PriorityBlockingQueue带排序的阻塞队列的实现，使用数组进行实现。并发控制使用ReentrantLock，队列为无界队列。有初始化参数指定队列大小，但是会自动扩容。使用最小堆来实现排序。
+DelayedQueueDelayedQueue是使用PriorityBlockingQueue和Delayed实现的，内部定义了一个优先级队列，当调用offer的时候，把Delayed对象加入队列中，使用take先把first对象拿出来(peek)，如果没有到达阈值，进行a ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2019/12/18/%E9%AB%98%E5%B9%B6%E5%8F%91/JAVA%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%8E%9F%E7%90%86%E4%B8%8E%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" title="JAVA线程池原理与源码分析"><img class="post-bg" src="https://cdn.jsdelivr.net/gh/clawhub/image/diffuser/top/19/11/27/b4a5ff53febcfefe69c91df73caad94f.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JAVA线程池原理与源码分析"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/12/18/%E9%AB%98%E5%B9%B6%E5%8F%91/JAVA%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%8E%9F%E7%90%86%E4%B8%8E%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" title="JAVA线程池原理与源码分析">JAVA线程池原理与源码分析</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-12-18T09:27:59.000Z" title="发表于 2019-12-18 17:27:59">2019-12-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E9%AB%98%E5%B9%B6%E5%8F%91/">高并发</a></span></div><div class="content">1、线程池常用接口介绍1.1、Executor123public interface Executor &#123;void execute(Runnable command);&#125;
+执行提交的Runnable任务。其中的execute方法在将来的某个时候执行给定的任务，该任务可以在新线程、池化线程或调用线程中执行,具体由Executor的实现者决定。
+1.2、ExecutorServiceExecutorService继承自Executor，下面挑几个方法介绍：
+1.2.1、shutdown()1void shutdown();
+启动有序关闭线程池，在此过程中执行先前提交的任务，但不接受任何新任务。如果线程池已经关闭，调用此方法不会产生额外的效果。此方法不等待以前提交的任务完成执行,可以使用awaitTermination去实现。
+1.2.2、shutdownNow()1List&lt;Runnable&gt; shutdownNow();
+尝试停止所有正在积极执行的任务， 停止处理等待的任务，并返回等待执行的任务列表。 此方法不等待以前提交的任务完成执行,可以使用await ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2019/12/18/LeetCode/234.%20%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8/" title="LeetCode|234.回文链表"><img class="post-bg" src="https://cdn.jsdelivr.net/gh/clawhub/image/diffuser/top/19/11/27/d41d04ee62d513b39fc79eb4b77c3f59.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LeetCode|234.回文链表"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/12/18/LeetCode/234.%20%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8/" title="LeetCode|234.回文链表">LeetCode|234.回文链表</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-12-17T16:34:23.000Z" title="发表于 2019-12-18 00:34:23">2019-12-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/LeetCode/">LeetCode</a></span></div><div class="content">题目描述
+等级: 简单请判断一个链表是否为回文链表。
+
+示例 1:
+12输入: 1-&gt;2输出: false
+
+示例 2:
+12输入: 1-&gt;2-&gt;2-&gt;1输出: true
+进阶：你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？
+思路对于单链表，回文，快慢指针，链表反转的考察。
+
+“回文”是指正读反读都能读通的句子，它是古今中外都有的一种修辞方式和文字游戏，如“我为人人，人人为我”等。在数学中也有这样一类数字有这样的特征，成为回文数（palindrome number）。 [1] 设n是一任意自然数。若将n的各位数字反向排列所得自然数n1与n相等，则称n为一回文数。例如，若n&#x3D;1234321，则称n为一回文数；但若n&#x3D;1234567，则n不是回文数。 [1] 
+
+注意：
+
+偶数个的数字也有回文数124421
+小数没有回文数
+
+链表反转请参考：反转单链表
+通过两个快慢指针可以获取链表中的中间位置节点。（快慢指针步数相差一倍）
+答案123456789101112131415161718192021222324252627282930 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2019/12/13/JAVA%E5%9F%BA%E7%A1%80/RedisTemplate-Cannot%20deserialize/" title="RedisTemplate Failed to deserialize payload"><img class="post-bg" src="https://cdn.jsdelivr.net/gh/clawhub/image/diffuser/top/19/11/28/17d2adcd8336cf46041ee24c020a709a.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="RedisTemplate Failed to deserialize payload"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/12/13/JAVA%E5%9F%BA%E7%A1%80/RedisTemplate-Cannot%20deserialize/" title="RedisTemplate Failed to deserialize payload">RedisTemplate Failed to deserialize payload</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-12-13T12:43:59.000Z" title="发表于 2019-12-13 20:43:59">2019-12-13</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java/">java</a></span></div><div class="content">问题123org.springframework.data.redis.serializer.SerializationException: Cannot deserialize; nested exception is org.springframework.core.serializer.support.SerializationFailedException: Failed to deserialize payload. Is the byte array a result of corresponding serialization for DefaultDeserializer?; nested exception is java.io.EOFExceptionat org.springframework.data.redis.serializer.JdkSerializationRedisSerializer.deserialize(JdkSerializationRedisSerializer.java:42)at org.springframework.data.red ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2019/12/11/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%88%86%E6%9E%90/" title="分布式锁的实现分析"><img class="post-bg" src="https://cdn.jsdelivr.net/gh/clawhub/image/diffuser/top/19/11/27/0cea5daa0b1ae51b3240aca515a8f39b.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="分布式锁的实现分析"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/12/11/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%88%86%E6%9E%90/" title="分布式锁的实现分析">分布式锁的实现分析</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-12-11T10:33:54.000Z" title="发表于 2019-12-11 18:33:54">2019-12-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></span></div><div class="content">1、设计目标分布式部署的应用集群中保证数据更新的互斥性，且程序出现异常时，锁能够自动释放，避免死锁发生。
+2、为什么要使用分布式锁为了保证分布式部署的应用集群中同一时间只有一个客户端对共享资源进行操作。根据锁的用途再细分：
+
+对共享资源的操作是幂等性的，使用分布式锁能够避免重复操作，从而提高效率。
+对共享资源的操作是非幂等的，比如订单状态的修改，如果多个客户端同时操作，最后的结果可能很遭，使用分布式锁可以让各个客户端分散时间操作。
+
+3、分布式锁应具备哪些条件这也是分布式锁的关键技术。
+
+互斥性这个是分布式锁的基本要求，分布式锁需要保证不同客户端的不同线程之间互斥。
+可重入性支持锁的重入，减少资源消耗。
+锁超时释放获取锁的客户端因为某些原因而宕机，而未能释放锁，其他客户端无法获取此锁，锁超时释放是为了避免死锁。
+安全性锁只能被持有该锁的用户删除，而不能被其他用户删除。
+高效与高可用加锁与解锁需要高效，并保证高可用，当部分节点宕机，客户端仍能获取锁或者释放锁。
+支持阻塞与非阻塞阻塞就是线程获取不到锁一直阻塞，增加超时时间可以防止一直阻塞。非阻塞则获取不到锁不阻塞线程。
+支持公平与非公平公 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2019/12/11/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%EF%BC%9AFastDFS%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/" title="分布式文件存储：FastDFS简单使用与原理分析"><img class="post-bg" src="https://cdn.jsdelivr.net/gh/clawhub/image/diffuser/top/19/11/27/466ce9eeda943a86a202d95602bb07a6.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="分布式文件存储：FastDFS简单使用与原理分析"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/12/11/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%EF%BC%9AFastDFS%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/" title="分布式文件存储：FastDFS简单使用与原理分析">分布式文件存储：FastDFS简单使用与原理分析</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-12-11T07:33:54.000Z" title="发表于 2019-12-11 15:33:54">2019-12-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></span></div><div class="content">引言FastDFS属于分布式存储范畴，分布式文件系统FastDFS非常适合中小型项目，在我接手维护公司图片服务的时候开始接触到它，本篇文章目的是总结一下FastDFS的知识点。
+用了2台2核4G的阿里云服务器做集群部署，具体部署步骤请参考：https://github.com/happyfish100/fastdfs/wiki
+1、FastDFS分布式文件系统概述FastDFS是一个轻量级的开源分布式文件系统，作者为淘宝资深架构余庆。FastDFS主要解决了分布式文件存储与高并发访问的问题，实现了负载均衡，适合存储图片、视频、文档等文件，而且支持存储服务器的在线扩容。
+2、FastDFS架构FastDFS服务端有两个角色：Tracker与Storage，其中Tracker主要做调度工作，有着负载均衡作用，Storage负责文件存取、同步等操作。
+FastDFS系统结构：
+
+2.1、Client客户端访问FastDFS分布式存储，一般为后端应用。
+2.2、TrackerTracker在FastDFS集群中有两大作用：
+
+管理Storage集群，在Storage服务启动时，会把自己注册到T ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2019/12/10/%E9%AB%98%E5%B9%B6%E5%8F%91/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E6%8C%91%E6%88%98%EF%BC%9A%E6%AD%BB%E9%94%81%E4%B8%8E%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2/" title="并发编程挑战：死锁与上下文切换"><img class="post-bg" src="https://cdn.jsdelivr.net/gh/clawhub/image/diffuser/top/19/11/27/3b653a1acb549bf2a00131876c154534.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="并发编程挑战：死锁与上下文切换"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/12/10/%E9%AB%98%E5%B9%B6%E5%8F%91/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E6%8C%91%E6%88%98%EF%BC%9A%E6%AD%BB%E9%94%81%E4%B8%8E%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2/" title="并发编程挑战：死锁与上下文切换">并发编程挑战：死锁与上下文切换</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-12-10T15:43:59.000Z" title="发表于 2019-12-10 23:43:59">2019-12-10</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E9%AB%98%E5%B9%B6%E5%8F%91/">高并发</a></span></div><div class="content">引言上下文切换（有时也称做进程切换或任务切换）是指 CPU 从一个进程或线程切换到另一个进程或线程。上下文切换会影响多线程执行速度。死锁是指多个进程或线程循环等待它方占有的资源而无限期地僵持下去的局面。
+1、上下文切换上下文定义cpu发生进程或者线程切换时，所依赖的数据集合，比如一个函数有外部变量，函数运行时，必须获取外部变量，这些变量值的集合就是上下文。
+引发问题对于CPU密集型任务，多线程处理会发生上下文切换，会影响到执行速度，如果时IO密集型，多线程技术优点尽显。
+如何减少上下文切换
+无锁并发编程，锁的获取与释放会发生上下文切换，多线程时会影响效率。无锁并发编程就是将数据分块，每个线程处理各自模块。比如LongAdder中部分代码。
+CAS算法，并发编程时通过CAS算法更新数据，而不必加锁。如Java的atomic包下的工具类。
+使用最少线程，减少不必要的线程创建，自定义线程池。
+使用协程，在单线程中维护多任务调度，处理任务间切换，Golang对于协程的使用很强大。
+
+2、死锁死锁定义死锁是进程死锁的简称，是由Dijkstra于1965年研究银行家算法时首先提出来的。系统发生死锁 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2019/12/10/%E9%AB%98%E5%B9%B6%E5%8F%91/JAVA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%88%86%E6%9E%90/" title="JAVA内存模型分析"><img class="post-bg" src="https://cdn.jsdelivr.net/gh/clawhub/image/diffuser/top/19/11/27/2857b5cbaf30313e54ee14e5c1bedfc1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JAVA内存模型分析"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/12/10/%E9%AB%98%E5%B9%B6%E5%8F%91/JAVA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%88%86%E6%9E%90/" title="JAVA内存模型分析">JAVA内存模型分析</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-12-10T15:10:59.000Z" title="发表于 2019-12-10 23:10:59">2019-12-10</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E9%AB%98%E5%B9%B6%E5%8F%91/">高并发</a></span></div><div class="content">在学习Java内存模型之前，先了解一下线程通信机制。
+1、线程通信机制在并发编程中，线程之间相互交换信息就是线程通信。目前有两种机制：内存共享与消息传递。
+1.1、共享内存Java采用的就是共享内存，本次学习的主要内容就是这个内存模型。内存共享方式必须通过锁或者CAS技术来获取或者修改共享的变量，看起来比较简单，但是锁的使用难度比较大，业务复杂的话还有可能发生死锁。
+1.2、消息传递Actor模型即是一个异步的、非阻塞的消息传递机制。Akka是对于Java的Actor模型库，用于构建高并发、分布式、可容错、事件驱动的基于JVM的应用。消息传递方式就是显示的通过发送消息来进行线程间通信，对于大型复杂的系统，可能优势更足。
+1.3、共享内存与消息传递的区别
+2、内存模型Java既然使用内存共享，必然就涉及到内存模型。
+2.1、结构抽象内存模型结构的抽象分为两个层次:
+
+多核CPU与内存之间
+Java多线程与主存之间
+
+2.1.1、多核CPU与内存之间因为CPU的运行速度与内存之间的存取速度不成正比，所以，引入了多级缓存概念，相应的也引出了缓存读取不一致问题，当然缓存一致性协议解决了这个问题 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2019/12/08/%E7%A6%8F%E5%88%A9/%E7%B2%BE%E9%80%89PDF%E7%89%88%E6%9C%AC%E4%B9%A6%E7%B1%8D%E7%AC%AC%E4%B8%80%E6%9C%9F/" title="精选PDF版本书籍第一期"><img class="post-bg" src="https://cdn.jsdelivr.net/gh/clawhub/image/diffuser/top/19/11/27/bfff056d1e8ca0e9ba91286143e7989d.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="精选PDF版本书籍第一期"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/12/08/%E7%A6%8F%E5%88%A9/%E7%B2%BE%E9%80%89PDF%E7%89%88%E6%9C%AC%E4%B9%A6%E7%B1%8D%E7%AC%AC%E4%B8%80%E6%9C%9F/" title="精选PDF版本书籍第一期">精选PDF版本书籍第一期</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-12-08T13:40:59.000Z" title="发表于 2019-12-08 21:40:59">2019-12-08</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%A6%8F%E5%88%A9/">福利</a></span></div><div class="content">福利概述精选JAVA必读书籍的PDF版本（来源于网络，侵删）。
+
+Effective java 中文版（第2版）
+Head First 设计模式（中文版）
+Java并发编程的艺术
+Java技术手册（第6版）
+Java性能权威指南
+Maven实战
+Netty实战 Netty IN ACTION
+Spring Boot实战
+Spring揭秘
+深入理解Java虚拟机（第2版） JVM高级特性与最佳实践
+
+扫描下方公众号，回复001获取。解压密码:clawhub
+
+</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#content-inner">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/#content-inner">34</a><a class="extend next" rel="next" href="/page/3/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/clawhub/image/blog/avatar.gif" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">ClawHub</div><div class="author-info__description">ClawHub的技术分享，记录学习中的点点滴滴！</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">331</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">35</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">35</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/clawhub" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:clawhub@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/09/20/%E9%9A%8F%E7%AC%94/2023%E9%87%8D%E6%95%B4%E5%BE%85%E5%8F%91/" title="2023重整待发"><img src="https://cdn.jsdelivr.net/gh/clawhub/image/diffuser/top/19/11/27/04cde2146d3d116bc3a2cea0a22d8138.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2023重整待发"/></a><div class="content"><a class="title" href="/2023/09/20/%E9%9A%8F%E7%AC%94/2023%E9%87%8D%E6%95%B4%E5%BE%85%E5%8F%91/" title="2023重整待发">2023重整待发</a><time datetime="2023-09-20T14:02:59.000Z" title="发表于 2023-09-20 22:02:59">2023-09-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/21/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E9%98%BF%E9%87%8CAPI%E7%BD%91%E5%85%B3%E4%B8%8EDubbo%E6%B3%9B%E5%8C%96%E8%B0%83%E7%94%A8/" title="阿里API网关与Dubbo泛化调用"><img src="https://cdn.jsdelivr.net/gh/ClawHub/image/image/photo-1677746792119-d8f8ee8e77f5%3Fcrop%3Dentropy%26cs%3Dtinysrgb%26fit%3Dcrop%26fm%3Djpg%26h%3D900%26ixid%3DMnwxfDB8MXxyYW5kb218MHxjb2xsZWN0aW9uaWR8fHx8fHx8MTY5NTc5ODc0Nw%26ixlib%3Drb-4.0.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="阿里API网关与Dubbo泛化调用"/></a><div class="content"><a class="title" href="/2022/05/21/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E9%98%BF%E9%87%8CAPI%E7%BD%91%E5%85%B3%E4%B8%8EDubbo%E6%B3%9B%E5%8C%96%E8%B0%83%E7%94%A8/" title="阿里API网关与Dubbo泛化调用">阿里API网关与Dubbo泛化调用</a><time datetime="2022-05-21T13:45:42.000Z" title="发表于 2022-05-21 21:45:42">2022-05-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/02/21/%E8%B5%84%E6%BA%90%E6%90%9C%E9%9B%86/%E6%9E%B6%E6%9E%84%E6%96%87%E7%AB%A0%E6%90%9C%E9%9B%86/" title="架构文章搜集"><img src="https://cdn.jsdelivr.net/gh/clawhub/image/diffuser/top/19/11/27/bfff056d1e8ca0e9ba91286143e7989d.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="架构文章搜集"/></a><div class="content"><a class="title" href="/2020/02/21/%E8%B5%84%E6%BA%90%E6%90%9C%E9%9B%86/%E6%9E%B6%E6%9E%84%E6%96%87%E7%AB%A0%E6%90%9C%E9%9B%86/" title="架构文章搜集">架构文章搜集</a><time datetime="2020-02-21T03:20:59.000Z" title="发表于 2020-02-21 11:20:59">2020-02-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/01/20/%E9%9A%8F%E7%AC%94/%E9%98%BF%E9%87%8CCCO%E9%A1%B9%E7%9B%AE%E9%9D%A2%E8%AF%95%E7%9A%84%E6%80%9D%E8%80%83/" title="阿里CCO项目组面试的思考"><img src="https://cdn.jsdelivr.net/gh/clawhub/image/diffuser/top/19/11/27/04cde2146d3d116bc3a2cea0a22d8138.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="阿里CCO项目组面试的思考"/></a><div class="content"><a class="title" href="/2020/01/20/%E9%9A%8F%E7%AC%94/%E9%98%BF%E9%87%8CCCO%E9%A1%B9%E7%9B%AE%E9%9D%A2%E8%AF%95%E7%9A%84%E6%80%9D%E8%80%83/" title="阿里CCO项目组面试的思考">阿里CCO项目组面试的思考</a><time datetime="2020-01-20T14:02:59.000Z" title="发表于 2020-01-20 22:02:59">2020-01-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/01/19/%E9%9D%A2%E8%AF%95/%E9%98%BF%E9%87%8CJava%E5%90%8E%E7%AB%AF%E5%9C%A8%E7%BA%BF%E7%AC%94%E8%AF%95%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88/" title="阿里Java后端在线笔试题及答案"><img src="https://cdn.jsdelivr.net/gh/clawhub/image/diffuser/top/19/11/27/36d28ae9e40c127e700c673778a902e0.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="阿里Java后端在线笔试题及答案"/></a><div class="content"><a class="title" href="/2020/01/19/%E9%9D%A2%E8%AF%95/%E9%98%BF%E9%87%8CJava%E5%90%8E%E7%AB%AF%E5%9C%A8%E7%BA%BF%E7%AC%94%E8%AF%95%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88/" title="阿里Java后端在线笔试题及答案">阿里Java后端在线笔试题及答案</a><time datetime="2020-01-19T03:33:59.000Z" title="发表于 2020-01-19 11:33:59">2020-01-19</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            <a class="card-more-btn" href="/categories/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a>
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Golang/"><span class="card-category-list-name">Golang</span><span class="card-category-list-count">32</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/JVM/"><span class="card-category-list-name">JVM</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/"><span class="card-category-list-name">Java</span><span class="card-category-list-count">57</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/Canal%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86/"><span class="card-category-list-name">Canal数据采集</span><span class="card-category-list-count">1</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/Canal%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86/Canal%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D%E5%8F%8A%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF%E6%80%BB%E7%BB%93/"><span class="card-category-list-name">Canal使用介绍及错误信息总结</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/JAVA%E5%9F%BA%E7%A1%80/"><span class="card-category-list-name">JAVA基础</span><span class="card-category-list-count">33</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/JAVA%E5%9F%BA%E7%A1%80%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/"><span class="card-category-list-name">JAVA基础集合框架</span><span class="card-category-list-count">20</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/LeetCode/"><span class="card-category-list-name">LeetCode</span><span class="card-category-list-count">6</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/Golang/" style="font-size: 1.4em; color: rgb(146, 31, 23)">Golang</a><a href="/tags/Java/" style="font-size: 1.45em; color: rgb(116, 169, 117)">Java</a><a href="/tags/Canal%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86/" style="font-size: 1.15em; color: rgb(32, 190, 189)">Canal数据采集</a><a href="/tags/Canal%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D%E5%8F%8A%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF%E6%80%BB%E7%BB%93/" style="font-size: 1.15em; color: rgb(21, 158, 103)">Canal使用介绍及错误信息总结</a><a href="/tags/JAVA%E5%9F%BA%E7%A1%80/" style="font-size: 1.42em; color: rgb(120, 169, 119)">JAVA基础</a><a href="/tags/java/" style="font-size: 1.17em; color: rgb(157, 196, 112)">java</a><a href="/tags/JVM/" style="font-size: 1.15em; color: rgb(39, 80, 88)">JVM</a><a href="/tags/java%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" style="font-size: 1.35em; color: rgb(97, 74, 8)">java并发容器源码分析</a><a href="/tags/LeetCode/" style="font-size: 1.23em; color: rgb(196, 86, 128)">LeetCode</a><a href="/tags/JAVA%E5%9F%BA%E7%A1%80%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/" style="font-size: 1.37em; color: rgb(26, 91, 104)">JAVA基础集合框架</a><a href="/tags/MyBatis/" style="font-size: 1.25em; color: rgb(170, 127, 170)">MyBatis</a><a href="/tags/java%E9%AB%98%E5%B9%B6%E5%8F%91/" style="font-size: 1.43em; color: rgb(25, 48, 138)">java高并发</a><a href="/tags/hexo/" style="font-size: 1.25em; color: rgb(162, 177, 30)">hexo</a><a href="/tags/Tomcat/" style="font-size: 1.32em; color: rgb(161, 134, 104)">Tomcat</a><a href="/tags/spring-aop/" style="font-size: 1.28em; color: rgb(32, 22, 109)">spring-aop</a><a href="/tags/spring-ioc/" style="font-size: 1.38em; color: rgb(46, 130, 181)">spring-ioc</a><a href="/tags/spring-tx/" style="font-size: 1.22em; color: rgb(156, 19, 183)">spring-tx</a><a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 1.22em; color: rgb(32, 111, 47)">分布式</a><a href="/tags/%E4%B8%80%E9%94%AE%E5%88%86%E5%8F%91%E5%B9%B3%E5%8F%B0/" style="font-size: 1.15em; color: rgb(57, 110, 115)">一键分发平台</a><a href="/tags/node/" style="font-size: 1.3em; color: rgb(188, 19, 70)">node</a><a href="/tags/electron/" style="font-size: 1.3em; color: rgb(115, 62, 197)">electron</a><a href="/tags/vue/" style="font-size: 1.3em; color: rgb(181, 52, 75)">vue</a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 1.18em; color: rgb(97, 191, 87)">数据结构与算法</a><a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" style="font-size: 1.15em; color: rgb(190, 44, 131)">微服务</a><a href="/tags/kafka/" style="font-size: 1.22em; color: rgb(186, 32, 195)">kafka</a><a href="/tags/mysql/" style="font-size: 1.33em; color: rgb(103, 139, 152)">mysql</a><a href="/tags/netty/" style="font-size: 1.27em; color: rgb(193, 100, 42)">netty</a><a href="/tags/zookeeper/" style="font-size: 1.22em; color: rgb(135, 109, 94)">zookeeper</a><a href="/tags/%E7%A6%8F%E5%88%A9/" style="font-size: 1.17em; color: rgb(180, 35, 195)">福利</a><a href="/tags/%E8%B5%84%E6%BA%90/" style="font-size: 1.15em; color: rgb(103, 109, 61)">资源</a><a href="/tags/%E8%B5%84%E6%BA%90%E6%B1%A0/" style="font-size: 1.22em; color: rgb(28, 130, 173)">资源池</a><a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 1.17em; color: rgb(104, 141, 87)">随笔</a><a href="/tags/redis/" style="font-size: 1.37em; color: rgb(76, 132, 54)">redis</a><a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 1.17em; color: rgb(131, 11, 36)">面试</a><a href="/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/" style="font-size: 1.2em; color: rgb(150, 55, 122)">高并发</a></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2023 By ClawHub</div><div class="footer_custom_text">好好学习 天天向上</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>window.typedJSFn = {
+  init: (str) => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: (subtitleType) => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        getScript('https://cdn.jsdelivr.net/npm/typed.js/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  }
+}
+</script><script>function subtitleType () {
+  if (true) {
+    typedJSFn.init(["好好学习&#44;天天向上","good good study,day day up"])
+  } else {
+    document.getElementById("subtitle").textContent = "好好学习&#44;天天向上"
+  }
+}
+typedJSFn.run(subtitleType)</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div></body></html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>ClawHub的技术分享 - 好好学习 天天向上</title><meta name="author" content="ClawHub"><meta name="copyright" content="ClawHub"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="ClawHub的技术分享，记录学习中的点点滴滴！">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ClawHub的技术分享">
+<meta property="og:url" content="https://clawhub.github.io/page/26/index.html">
+<meta property="og:site_name" content="ClawHub的技术分享">
+<meta property="og:description" content="ClawHub的技术分享，记录学习中的点点滴滴！">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/clawhub/image/blog/avatar.gif">
+<meta property="article:author" content="ClawHub">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/clawhub/image/blog/avatar.gif"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/clawhub/image/blog/favicon-32x32-clawhub.png"><link rel="canonical" href="https://clawhub.github.io/page/26/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"GOOBOT5XB8","apiKey":"68084d3bd15b2455050d3030780a5821","indexName":"clawhub-blog-search","hits":{"per_page":6},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'ClawHub的技术分享',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-09-27 15:16:25'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/clawhub/image/blog/avatar.gif" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">331</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">35</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">35</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/clawhub/image/diffuser/blog/19/11/30/e1eb1cc50aa0a5a2fcdbf929152dbbef.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="ClawHub的技术分享"><span class="site-name">ClawHub的技术分享</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">ClawHub的技术分享</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/clawhub" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:clawhub@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2019/08/06/JAVA%E9%AB%98%E5%B9%B6%E5%8F%91/%E3%80%90J-U-C%E3%80%91%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%B9%8B%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" title="【J.U.C】线程池之实现原理">【J.U.C】线程池之实现原理</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-08-06T13:47:33.000Z" title="发表于 2019-08-06 21:47:33">2019-08-06</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java%E9%AB%98%E5%B9%B6%E5%8F%91/">java高并发</a></span></div><div class="content">线程池状态线程池的内部状态由AtomicInteger修饰的ctl表示，其高3位表示线程池的运行状态，低29位表示线程池中的线程数量：具体看代码注释。
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969798991001011021031041051061071081091101111121131141151161171181191201211221231241251261271281291301311321331341351361371381391401411421431441451461471481491501511521531541551561571581591601611621631641651661671681691701711721731741751761771 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2019/08/06/JAVA%E9%AB%98%E5%B9%B6%E5%8F%91/%E3%80%90J-U-C%E3%80%91%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%B9%8B%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E4%B8%8EThreadPoolExecutor%E4%BB%8B%E7%BB%8D/" title="【J.U.C】线程池之工作流程与ThreadPoolExecutor介绍">【J.U.C】线程池之工作流程与ThreadPoolExecutor介绍</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-08-06T13:45:39.000Z" title="发表于 2019-08-06 21:45:39">2019-08-06</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java%E9%AB%98%E5%B9%B6%E5%8F%91/">java高并发</a></span></div><div class="content">线程池工作流程
+
+如果当前运行的线程少于corePoolSize，则创建新线程（核心线程）来执行任务。
+如果运行的线程等于或多于corePoolSize ,则将任务加入BlockingQueue。
+如果BlockingQueue队列已满，则创建新的线程（非核心）来处理任务。
+如果核心线程与非核心线程总数超出maxiumPoolSize，任务将被拒绝，并调用RejectedExecutionHandler.rejectedExecution()方法。
+
+ThreeadPoolExecutor1234567public ThreadPoolExecutor(int corePoolSize,                             int maximumPoolSize,                             long keepAliveTime,                             TimeUnit unit,                             BlockingQueue&lt;Runnable&gt; work ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2019/08/06/JAVA%E9%AB%98%E5%B9%B6%E5%8F%91/%E3%80%90J-U-C%E3%80%91%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%B9%8B%E5%87%A0%E4%B8%AA%E5%B8%B8%E7%94%A8%E6%8E%A5%E5%8F%A3%E4%BB%8B%E7%BB%8D/" title="【J.U.C】线程池之几个常用接口介绍">【J.U.C】线程池之几个常用接口介绍</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-08-06T13:45:06.000Z" title="发表于 2019-08-06 21:45:06">2019-08-06</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java%E9%AB%98%E5%B9%B6%E5%8F%91/">java高并发</a></span></div><div class="content">1、线程池常用接口介绍1.1、Executor123public interface Executor &#123;void execute(Runnable command);&#125;
+执行提交的Runnable任务。其中的execute方法在将来的某个时候执行给定的任务，该任务可以在新线程、池化线程或调用线程中执行,具体由Executor的实现者决定。
+1.2、ExecutorServiceExecutorService继承自Executor，下面挑几个方法介绍：
+1.2.1、shutdown()1void shutdown();
+启动有序关闭线程池，在此过程中执行先前提交的任务，但不接受任何新任务。如果线程池已经关闭，调用此方法不会产生额外的效果。此方法不等待以前提交的任务完成执行,可以使用awaitTermination去实现。
+1.2.2、shutdownNow()1List&lt;Runnable&gt; shutdownNow();
+尝试停止所有正在积极执行的任务， 停止处理等待的任务，并返回等待执行的任务列表。 此方法不等待以前提交的任务完成执行,可以使用await ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2019/08/06/JAVA%E9%AB%98%E5%B9%B6%E5%8F%91/%E3%80%90J-U-C%E3%80%91JAVA%E5%B9%B6%E5%8F%91%E8%BE%85%E5%8A%A9%E5%B7%A5%E5%85%B7%E7%B1%BB-CountDownLatch%E3%80%81CyclicBarrier%E3%80%81Semaphore%E4%B9%8B%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D%E5%8F%8A%E5%92%8CGolang%E7%9A%84WaitGroup%E6%AF%94%E8%BE%83/" title="【J.U.C】JAVA并发辅助工具类-CountDownLatch、CyclicBarrier、Semaphore之简单介绍及和Golang的WaitGroup比较">【J.U.C】JAVA并发辅助工具类-CountDownLatch、CyclicBarrier、Semaphore之简单介绍及和Golang的WaitGroup比较</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-08-06T13:42:49.000Z" title="发表于 2019-08-06 21:42:49">2019-08-06</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java%E9%AB%98%E5%B9%B6%E5%8F%91/">java高并发</a></span></div><div class="content">CyclicBarrier同步屏障CyclicBarrier默认的构造方法CyclicBarrier(int parties)，其参数表示屏障拦截的线程数量，每个线程调用await方法告诉CyclicBarrier我已经到达屏障，然后当前线程被阻塞，直到被拦截的线程全部都到达了屏障，然后前面被阻塞的线程才能开始执行，否则会被一直阻塞。就像正式场合围着桌子吃饭，要等所有人都到到齐之后，才可以开餐。先来的人要等待。
+查看栅栏类可以看到其主要是由ReentrantLock和Condition结合计数器实现。
+Semaphore信号量用于控制线程的并发数量，线程只有拿到许可证的时候才能执行。其源码中通过Sync同步器实现了AQS的共享模式。因为刚刚分析完ReentrantReadWriteLock中的读锁，实现方式差不多，所以在这就不分析源码了。比喻：吃饭的时候，有一碗汤，只有两个勺子，也就是说同时只能由两个人拿到勺子成汤，其他人没拿到勺子，只能吃别的东西。
+CountDownLatch为什么最后说这个类呢，因为它的功能和Golang中的WaitGroup很相似：都属于倒计时类型。在一些应用场 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2019/08/06/JAVA%E9%AB%98%E5%B9%B6%E5%8F%91/%E3%80%90J-U-C%E3%80%91lockInterruptibly%E4%B8%8Elock/" title="【J.U.C】lockInterruptibly与lock">【J.U.C】lockInterruptibly与lock</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-08-06T13:42:25.000Z" title="发表于 2019-08-06 21:42:25">2019-08-06</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java%E9%AB%98%E5%B9%B6%E5%8F%91/">java高并发</a></span></div><div class="content">引言在看LinkedBlockingQueue源码时，发现一点疑惑：poll(long timeout, TimeUnit unit)方法中通过takeLock.lockInterruptibly()获取锁，其重载方法poll()中，通过takeLock.lock()获取锁。
+通过查看ReentrantLock源码中lockInterruptibly()与lock()方法，解决上述问题。
+lock()lock()调用了抽象类Sync（实现了AQS）的lock()方法，这是一个抽象方法，有两个实现，一个公平锁，一个非公平锁，最终都调用到acquire(int arg)方法，内部处理了中断。优先考虑获取锁，待获取锁成功后，才响应中断。
+123456789101112131415161718192021222324252627282930313233343536/**    * 获得锁。    *    * 如果锁不被其他线程持有，则获取锁，并立即返回，将锁持有计数设置为1。    *    * 如果当前线程已经持有锁，那么持有计数将增加1，方法立即返回。    *    * 如果锁由另一个 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2019/08/06/JAVA%E9%AB%98%E5%B9%B6%E5%8F%91/%E3%80%90J-U-C%E3%80%91LockSupport%E6%BA%90%E7%A0%81%E7%BF%BB%E8%AF%91/" title="【J.U.C】LockSupport源码翻译">【J.U.C】LockSupport源码翻译</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-08-06T13:41:51.000Z" title="发表于 2019-08-06 21:41:51">2019-08-06</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java%E9%AB%98%E5%B9%B6%E5%8F%91/">java高并发</a></span></div><div class="content">JDK LockSuppoprt源码翻译
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210310410510610710810911011111211311411511611711811912012112212312412512612712812913013113213313413513613713813914014114214314414514614714814915015115215315415515615715815916016116216316416516616716816917017117217317417517617717817918018118218318418518618718818919019119219319419519 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2019/08/06/JAVA%E9%AB%98%E5%B9%B6%E5%8F%91/%E3%80%90J-U-C%E3%80%91LockSupport/" title="【J.U.C】LockSupport">【J.U.C】LockSupport</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-08-06T13:41:21.000Z" title="发表于 2019-08-06 21:41:21">2019-08-06</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java%E9%AB%98%E5%B9%B6%E5%8F%91/">java高并发</a></span></div><div class="content">引言LockSupport是用于创建锁和其他同步类的阻塞原语，通过调用Unsafe函数中的接口实现阻塞和解除阻塞的。
+pack
+
+
+方法
+解释
+
+
+
+park(Object)
+挂起当前线程
+
+
+parkNanos(Object, long)
+指定了一个挂起时间（相对于当前的时间），时间到后自动被唤醒；例如1000纳秒后自动唤醒
+
+
+parkUntil(Object, long)
+指定一个挂起时间（绝对时间），时间到后自动被唤醒；例如2018-02-12 21点整自动被唤醒。
+
+
+park()
+和park(Object)相比少了挂起前为线程设置blocker、被唤醒后清理blocker的操作。
+
+
+parkNanos(long)
+和parkNanos(Object, long)类似，仅少了blocker相关的操作
+
+
+parkUntil(long)
+和parkUntil(Object, long)类似，仅少了blocker相关的操作
+
+
+park(Object blocker)源码分析：
+12345678910111213141516171819202122232425262728293 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2019/08/06/JAVA%E9%AB%98%E5%B9%B6%E5%8F%91/%E3%80%90J-U-C%E3%80%91LongAdder%E4%B8%8EAtomicLong/" title="【J.U.C】LongAdder与AtomicLong">【J.U.C】LongAdder与AtomicLong</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-08-06T13:40:37.000Z" title="发表于 2019-08-06 21:40:37">2019-08-06</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java%E9%AB%98%E5%B9%B6%E5%8F%91/">java高并发</a></span></div><div class="content">引言前一阵子看ConcurrentHashMap的源码，其中计数部分提及到LongAdder，之后看了一下LongAdder，发现他们实现的思路是一样的，都是将单节点的并发分散到多个节点。LongAdder的使用场景也就适用于高并发的情形。比如QPS的计算，在多个线程频发更新QPS的时候，效率会很高。计数选型：单线程那直接用Long最好了，并发不高的情况用AtomicLong，并发高时选LongAdder。
+AtomicLong，并发都作用到了单一的volatile的value上。
+1private volatile long value;
+而LongAdder将并发分散到了多个Cell上，增加实现比较复杂，但是在高并发场景确实比较优秀。
+1234567891011121314151617181920212223242526272829303132333435/**  * Padded variant of AtomicLong supporting only raw accesses plus CAS.  *  * JVM intrinsics note: It would be p ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2019/08/06/JAVA%E9%AB%98%E5%B9%B6%E5%8F%91/%E3%80%90SharingObjects%E3%80%91ThreadLocal/" title="【SharingObjects】ThreadLocal">【SharingObjects】ThreadLocal</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-08-06T13:40:08.000Z" title="发表于 2019-08-06 21:40:08">2019-08-06</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java%E9%AB%98%E5%B9%B6%E5%8F%91/">java高并发</a></span></div><div class="content">描述
+该类提供了线程局部（thread-local）变量。这些变量不同于它们的普通对应物，因为访问某个变量（通过其get或set方法）的每个线程都有自己的局部变量，它独立于变量的初始化副本。ThreadLocal实例通常是类中的private static字段，它们希望将状态与某一个线程（例如，用户ID或事物ID）相关联。
+
+场景适用于无状态，副本变量独立后不影响业务逻辑的高并发场景。Hibernate的session获取场景
+123456789101112131415161718192021private static final ThreadLocal&lt;Session&gt; threadLocal = new ThreadLocal&lt;Session&gt;();//获取Sessionpublic static Session getCurrentSession()&#123;    Session session =  threadLocal.get();    //判断Session是否为空，如果为空，将创建一个session，并设置到本地线程变量中    try  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2019/08/06/JAVA%E9%AB%98%E5%B9%B6%E5%8F%91/%E3%80%90%E9%94%81%E3%80%91Condition%E6%8E%A5%E5%8F%A3%E5%88%86%E6%9E%90/" title="【锁】Condition接口分析">【锁】Condition接口分析</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-08-06T13:39:20.000Z" title="发表于 2019-08-06 21:39:20">2019-08-06</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java%E9%AB%98%E5%B9%B6%E5%8F%91/">java高并发</a></span></div><div class="content">引言Condition是用来代替传统Object中的wait()和notify()实现线程间的协作，Condition的await()和signal()用于处理线程间协作更加安全与高效，JAVA中的阻塞队列就是用Condision实现。Condition的使用必须在锁定与解锁直接使用，且只能通过lock.newCondition()获取。
+使用例子：假设有一个有界的缓冲区，它支持put和take方法。如果在空缓冲区上尝试take，那么线程将阻塞，直到缓冲区中有数据可用为止;如果在一个数据已满的缓冲区上尝试put，那么线程将阻塞，直到空间可用为止。我们希望在单独的等待集中继续等待put线程和take线程，这样我们就可以在缓冲区中的数据或空间可用时只通知单个线程。这可以使用两个Condition实例来实现。
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152//有界缓冲 class BoundedBuffer &#123;    //重入锁   fin ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/25/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/#content-inner">25</a><span class="page-number current">26</span><a class="page-number" href="/page/27/#content-inner">27</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/#content-inner">34</a><a class="extend next" rel="next" href="/page/27/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/clawhub/image/blog/avatar.gif" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">ClawHub</div><div class="author-info__description">ClawHub的技术分享，记录学习中的点点滴滴！</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">331</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">35</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">35</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/clawhub" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:clawhub@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/09/20/%E9%9A%8F%E7%AC%94/2023%E9%87%8D%E6%95%B4%E5%BE%85%E5%8F%91/" title="2023重整待发"><img src="https://cdn.jsdelivr.net/gh/clawhub/image/diffuser/top/19/11/27/04cde2146d3d116bc3a2cea0a22d8138.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2023重整待发"/></a><div class="content"><a class="title" href="/2023/09/20/%E9%9A%8F%E7%AC%94/2023%E9%87%8D%E6%95%B4%E5%BE%85%E5%8F%91/" title="2023重整待发">2023重整待发</a><time datetime="2023-09-20T14:02:59.000Z" title="发表于 2023-09-20 22:02:59">2023-09-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/21/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E9%98%BF%E9%87%8CAPI%E7%BD%91%E5%85%B3%E4%B8%8EDubbo%E6%B3%9B%E5%8C%96%E8%B0%83%E7%94%A8/" title="阿里API网关与Dubbo泛化调用"><img src="https://cdn.jsdelivr.net/gh/ClawHub/image/image/photo-1677746792119-d8f8ee8e77f5%3Fcrop%3Dentropy%26cs%3Dtinysrgb%26fit%3Dcrop%26fm%3Djpg%26h%3D900%26ixid%3DMnwxfDB8MXxyYW5kb218MHxjb2xsZWN0aW9uaWR8fHx8fHx8MTY5NTc5ODc0Nw%26ixlib%3Drb-4.0.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="阿里API网关与Dubbo泛化调用"/></a><div class="content"><a class="title" href="/2022/05/21/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E9%98%BF%E9%87%8CAPI%E7%BD%91%E5%85%B3%E4%B8%8EDubbo%E6%B3%9B%E5%8C%96%E8%B0%83%E7%94%A8/" title="阿里API网关与Dubbo泛化调用">阿里API网关与Dubbo泛化调用</a><time datetime="2022-05-21T13:45:42.000Z" title="发表于 2022-05-21 21:45:42">2022-05-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/02/21/%E8%B5%84%E6%BA%90%E6%90%9C%E9%9B%86/%E6%9E%B6%E6%9E%84%E6%96%87%E7%AB%A0%E6%90%9C%E9%9B%86/" title="架构文章搜集"><img src="https://cdn.jsdelivr.net/gh/clawhub/image/diffuser/top/19/11/27/bfff056d1e8ca0e9ba91286143e7989d.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="架构文章搜集"/></a><div class="content"><a class="title" href="/2020/02/21/%E8%B5%84%E6%BA%90%E6%90%9C%E9%9B%86/%E6%9E%B6%E6%9E%84%E6%96%87%E7%AB%A0%E6%90%9C%E9%9B%86/" title="架构文章搜集">架构文章搜集</a><time datetime="2020-02-21T03:20:59.000Z" title="发表于 2020-02-21 11:20:59">2020-02-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/01/20/%E9%9A%8F%E7%AC%94/%E9%98%BF%E9%87%8CCCO%E9%A1%B9%E7%9B%AE%E9%9D%A2%E8%AF%95%E7%9A%84%E6%80%9D%E8%80%83/" title="阿里CCO项目组面试的思考"><img src="https://cdn.jsdelivr.net/gh/clawhub/image/diffuser/top/19/11/27/04cde2146d3d116bc3a2cea0a22d8138.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="阿里CCO项目组面试的思考"/></a><div class="content"><a class="title" href="/2020/01/20/%E9%9A%8F%E7%AC%94/%E9%98%BF%E9%87%8CCCO%E9%A1%B9%E7%9B%AE%E9%9D%A2%E8%AF%95%E7%9A%84%E6%80%9D%E8%80%83/" title="阿里CCO项目组面试的思考">阿里CCO项目组面试的思考</a><time datetime="2020-01-20T14:02:59.000Z" title="发表于 2020-01-20 22:02:59">2020-01-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/01/19/%E9%9D%A2%E8%AF%95/%E9%98%BF%E9%87%8CJava%E5%90%8E%E7%AB%AF%E5%9C%A8%E7%BA%BF%E7%AC%94%E8%AF%95%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88/" title="阿里Java后端在线笔试题及答案"><img src="https://cdn.jsdelivr.net/gh/clawhub/image/diffuser/top/19/11/27/36d28ae9e40c127e700c673778a902e0.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="阿里Java后端在线笔试题及答案"/></a><div class="content"><a class="title" href="/2020/01/19/%E9%9D%A2%E8%AF%95/%E9%98%BF%E9%87%8CJava%E5%90%8E%E7%AB%AF%E5%9C%A8%E7%BA%BF%E7%AC%94%E8%AF%95%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88/" title="阿里Java后端在线笔试题及答案">阿里Java后端在线笔试题及答案</a><time datetime="2020-01-19T03:33:59.000Z" title="发表于 2020-01-19 11:33:59">2020-01-19</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            <a class="card-more-btn" href="/categories/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a>
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Golang/"><span class="card-category-list-name">Golang</span><span class="card-category-list-count">32</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/JVM/"><span class="card-category-list-name">JVM</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/"><span class="card-category-list-name">Java</span><span class="card-category-list-count">57</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/Canal%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86/"><span class="card-category-list-name">Canal数据采集</span><span class="card-category-list-count">1</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/Canal%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86/Canal%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D%E5%8F%8A%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF%E6%80%BB%E7%BB%93/"><span class="card-category-list-name">Canal使用介绍及错误信息总结</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/JAVA%E5%9F%BA%E7%A1%80/"><span class="card-category-list-name">JAVA基础</span><span class="card-category-list-count">33</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/JAVA%E5%9F%BA%E7%A1%80%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/"><span class="card-category-list-name">JAVA基础集合框架</span><span class="card-category-list-count">20</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/LeetCode/"><span class="card-category-list-name">LeetCode</span><span class="card-category-list-count">6</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/Golang/" style="font-size: 1.4em; color: rgb(146, 31, 23)">Golang</a><a href="/tags/Java/" style="font-size: 1.45em; color: rgb(116, 169, 117)">Java</a><a href="/tags/Canal%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86/" style="font-size: 1.15em; color: rgb(32, 190, 189)">Canal数据采集</a><a href="/tags/Canal%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D%E5%8F%8A%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF%E6%80%BB%E7%BB%93/" style="font-size: 1.15em; color: rgb(21, 158, 103)">Canal使用介绍及错误信息总结</a><a href="/tags/JAVA%E5%9F%BA%E7%A1%80/" style="font-size: 1.42em; color: rgb(120, 169, 119)">JAVA基础</a><a href="/tags/java/" style="font-size: 1.17em; color: rgb(157, 196, 112)">java</a><a href="/tags/JVM/" style="font-size: 1.15em; color: rgb(39, 80, 88)">JVM</a><a href="/tags/java%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" style="font-size: 1.35em; color: rgb(97, 74, 8)">java并发容器源码分析</a><a href="/tags/LeetCode/" style="font-size: 1.23em; color: rgb(196, 86, 128)">LeetCode</a><a href="/tags/JAVA%E5%9F%BA%E7%A1%80%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/" style="font-size: 1.37em; color: rgb(26, 91, 104)">JAVA基础集合框架</a><a href="/tags/MyBatis/" style="font-size: 1.25em; color: rgb(170, 127, 170)">MyBatis</a><a href="/tags/java%E9%AB%98%E5%B9%B6%E5%8F%91/" style="font-size: 1.43em; color: rgb(25, 48, 138)">java高并发</a><a href="/tags/hexo/" style="font-size: 1.25em; color: rgb(162, 177, 30)">hexo</a><a href="/tags/Tomcat/" style="font-size: 1.32em; color: rgb(161, 134, 104)">Tomcat</a><a href="/tags/spring-aop/" style="font-size: 1.28em; color: rgb(32, 22, 109)">spring-aop</a><a href="/tags/spring-ioc/" style="font-size: 1.38em; color: rgb(46, 130, 181)">spring-ioc</a><a href="/tags/spring-tx/" style="font-size: 1.22em; color: rgb(156, 19, 183)">spring-tx</a><a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 1.22em; color: rgb(32, 111, 47)">分布式</a><a href="/tags/%E4%B8%80%E9%94%AE%E5%88%86%E5%8F%91%E5%B9%B3%E5%8F%B0/" style="font-size: 1.15em; color: rgb(57, 110, 115)">一键分发平台</a><a href="/tags/node/" style="font-size: 1.3em; color: rgb(188, 19, 70)">node</a><a href="/tags/electron/" style="font-size: 1.3em; color: rgb(115, 62, 197)">electron</a><a href="/tags/vue/" style="font-size: 1.3em; color: rgb(181, 52, 75)">vue</a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 1.18em; color: rgb(97, 191, 87)">数据结构与算法</a><a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" style="font-size: 1.15em; color: rgb(190, 44, 131)">微服务</a><a href="/tags/kafka/" style="font-size: 1.22em; color: rgb(186, 32, 195)">kafka</a><a href="/tags/mysql/" style="font-size: 1.33em; color: rgb(103, 139, 152)">mysql</a><a href="/tags/netty/" style="font-size: 1.27em; color: rgb(193, 100, 42)">netty</a><a href="/tags/zookeeper/" style="font-size: 1.22em; color: rgb(135, 109, 94)">zookeeper</a><a href="/tags/%E7%A6%8F%E5%88%A9/" style="font-size: 1.17em; color: rgb(180, 35, 195)">福利</a><a href="/tags/%E8%B5%84%E6%BA%90/" style="font-size: 1.15em; color: rgb(103, 109, 61)">资源</a><a href="/tags/%E8%B5%84%E6%BA%90%E6%B1%A0/" style="font-size: 1.22em; color: rgb(28, 130, 173)">资源池</a><a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 1.17em; color: rgb(104, 141, 87)">随笔</a><a href="/tags/redis/" style="font-size: 1.37em; color: rgb(76, 132, 54)">redis</a><a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 1.17em; color: rgb(131, 11, 36)">面试</a><a href="/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/" style="font-size: 1.2em; color: rgb(150, 55, 122)">高并发</a></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2023 By ClawHub</div><div class="footer_custom_text">好好学习 天天向上</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>window.typedJSFn = {
+  init: (str) => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: (subtitleType) => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        getScript('https://cdn.jsdelivr.net/npm/typed.js/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  }
+}
+</script><script>function subtitleType () {
+  if (true) {
+    typedJSFn.init(["好好学习&#44;天天向上","good good study,day day up"])
+  } else {
+    document.getElementById("subtitle").textContent = "好好学习&#44;天天向上"
+  }
+}
+typedJSFn.run(subtitleType)</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div></body></html>
