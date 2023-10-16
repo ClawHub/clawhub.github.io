@@ -1,0 +1,397 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>提醒单对接ES与分库分表分析 | ClawHub的技术分享</title><meta name="author" content="ClawHub"><meta name="copyright" content="ClawHub"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1、问题及数据1.1、涉及到提醒单的SQL查询优化无力。 12345678select count(*)  from remind_bill where is_deleted&#x3D; 0   and group_id&#x3D; 10545724654284683189   and remind_type&#x3D; 0   and state&#x3D; 0   and(id_own_org in(1054617245517587">
+<meta property="og:type" content="article">
+<meta property="og:title" content="提醒单对接ES与分库分表分析">
+<meta property="og:url" content="https://clawhub.github.io/2022/06/28/%E4%B8%9A%E5%8A%A1%E6%A2%B3%E7%90%86/%E6%8F%90%E9%86%92%E5%8D%95%E5%AF%B9%E6%8E%A5ES%E4%B8%8E%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="ClawHub的技术分享">
+<meta property="og:description" content="1、问题及数据1.1、涉及到提醒单的SQL查询优化无力。 12345678select count(*)  from remind_bill where is_deleted&#x3D; 0   and group_id&#x3D; 10545724654284683189   and remind_type&#x3D; 0   and state&#x3D; 0   and(id_own_org in(1054617245517587">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ClawHub/image/image/photo-1695749787631-644ada7d5892%3Fcrop%3Dentropy%26cs%3Dtinysrgb%26fit%3Dcrop%26fm%3Djpg%26h%3D900%26ixid%3DMnwxfDB8MXxyYW5kb218MHxjb2xsZWN0aW9uaWR8fHx8fHx8MTY5NzI4MjU0NA%26ixlib%3Drb-4.0.jpeg">
+<meta property="article:published_time" content="2022-06-28T11:18:00.000Z">
+<meta property="article:modified_time" content="2023-10-14T11:22:52.820Z">
+<meta property="article:author" content="ClawHub">
+<meta property="article:tag" content="业务梳理">
+<meta property="article:tag" content="商机提醒">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/ClawHub/image/image/photo-1695749787631-644ada7d5892%3Fcrop%3Dentropy%26cs%3Dtinysrgb%26fit%3Dcrop%26fm%3Djpg%26h%3D900%26ixid%3DMnwxfDB8MXxyYW5kb218MHxjb2xsZWN0aW9uaWR8fHx8fHx8MTY5NzI4MjU0NA%26ixlib%3Drb-4.0.jpeg"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/clawhub/image/blog/favicon-32x32-clawhub.png"><link rel="canonical" href="https://clawhub.github.io/2022/06/28/%E4%B8%9A%E5%8A%A1%E6%A2%B3%E7%90%86/%E6%8F%90%E9%86%92%E5%8D%95%E5%AF%B9%E6%8E%A5ES%E4%B8%8E%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E5%88%86%E6%9E%90/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"GOOBOT5XB8","apiKey":"68084d3bd15b2455050d3030780a5821","indexName":"clawhub-blog-search","hits":{"per_page":6},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '提醒单对接ES与分库分表分析',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-14 19:22:52'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/clawhub/image/blog/avatar.gif" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">383</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">67</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">46</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/ClawHub/image/image/photo-1695749787631-644ada7d5892%3Fcrop%3Dentropy%26cs%3Dtinysrgb%26fit%3Dcrop%26fm%3Djpg%26h%3D900%26ixid%3DMnwxfDB8MXxyYW5kb218MHxjb2xsZWN0aW9uaWR8fHx8fHx8MTY5NzI4MjU0NA%26ixlib%3Drb-4.0.jpeg')"><nav id="nav"><span id="blog-info"><a href="/" title="ClawHub的技术分享"><span class="site-name">ClawHub的技术分享</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">提醒单对接ES与分库分表分析</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-06-28T11:18:00.000Z" title="发表于 2022-06-28 19:18:00">2022-06-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-14T11:22:52.820Z" title="更新于 2023-10-14 19:22:52">2023-10-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%B8%9A%E5%8A%A1%E6%A2%B3%E7%90%86/">业务梳理</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="1、问题及数据"><a href="#1、问题及数据" class="headerlink" title="1、问题及数据"></a>1、问题及数据</h1><p>1.1、涉及到提醒单的SQL查询优化无力。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">count</span>(<span class="operator">*</span>)</span><br><span class="line">  <span class="keyword">from</span> remind_bill</span><br><span class="line"> <span class="keyword">where</span> is_deleted<span class="operator">=</span> <span class="number">0</span></span><br><span class="line">   <span class="keyword">and</span> group_id<span class="operator">=</span> <span class="number">10545724654284683189</span></span><br><span class="line">   <span class="keyword">and</span> remind_type<span class="operator">=</span> <span class="number">0</span></span><br><span class="line">   <span class="keyword">and</span> state<span class="operator">=</span> <span class="number">0</span></span><br><span class="line">   <span class="keyword">and</span>(id_own_org <span class="keyword">in</span>(<span class="number">10546172455175872464</span>, <span class="number">10907434497490929133</span>, <span class="number">10546443563656228053</span>, <span class="number">10546443563688497585</span>, <span class="number">11240984669917035533</span>, <span class="number">11240984669916854029</span>, <span class="number">11240984669917046024</span>, <span class="number">11240984669917046025</span>, <span class="number">10907434497444308271</span>, <span class="number">10546172455159754217</span>, <span class="number">10546050787350194851</span>, <span class="number">10545724654285435665</span>, <span class="number">10546443563727532329</span>, <span class="number">10546443563681314151</span>, <span class="number">10545724654285433611</span>, <span class="number">10545724654301013514</span>, <span class="number">10546443563674535370</span>, <span class="number">10546443563951056968</span>, <span class="number">10907434497418880888</span>, <span class="number">10907434497457246467</span>, <span class="number">10545724654297182142</span>, <span class="number">10546443563843224093</span>, <span class="number">10907434497420505040</span>, <span class="number">10907434497348682291</span>, <span class="number">10545724654285431864</span>, <span class="number">10545724654285432888</span>, <span class="number">10546050787350196051</span>, <span class="number">10907434497357402047</span>, <span class="number">10907434497470850803</span>, <span class="number">10546172455222800352</span>, <span class="number">10907434497378606711</span>, <span class="number">11240984669916797520</span>, <span class="number">11240984669917045590</span>, <span class="number">10545724654285433927</span>, <span class="number">10545724654294798264</span>, <span class="number">11240984669917045591</span>, <span class="number">10545724654285435972</span>, <span class="number">10546172455177448351</span>, <span class="number">10907434497493913040</span>, <span class="number">10546172455169452312</span>, <span class="number">10546443563693481390</span>, <span class="number">10691192243927853249</span>, <span class="number">10545724654300417571</span>, <span class="number">10546050787357371709</span>, <span class="number">10907434497334641736</span>, <span class="number">10546443564050948214</span>, <span class="number">10546443563706648555</span>, <span class="number">10546443564025546476</span>, <span class="number">10546443563701603420</span>, <span class="number">10907434497355836924</span>, <span class="number">10546443563765241972</span>, <span class="number">11240984669916906091</span>, <span class="number">10546050787350196607</span>, <span class="number">10546443563730997650</span>, <span class="number">10546443563808717302</span>, <span class="number">10546443563656232700</span>, <span class="number">11240984669917044087</span>, <span class="number">11240984669917034608</span>, <span class="number">10546443563682941047</span>, <span class="number">10546443563951281274</span>, <span class="number">11240984669916926586</span>, <span class="number">10545724654285437233</span>, <span class="number">10907434497435970332</span>, <span class="number">10545724654284683060</span>, <span class="number">11240984669917044088</span>, <span class="number">10907434497450373186</span>, <span class="number">10545724654285432442</span>, <span class="number">11240984669916795520</span>, <span class="number">10545724654285436537</span>, <span class="number">10907434497415854333</span>, <span class="number">10907434497301174552</span>, <span class="number">10545724654290417360</span>, <span class="number">10546443563673467473</span>, <span class="number">11240984669917044619</span>, <span class="number">10545724654285436809</span>, <span class="number">10546443563743386482</span>, <span class="number">10907434497311671722</span>, <span class="number">10907434497409259937</span>, <span class="number">10545724654285435012</span>, <span class="number">10545724654285433232</span>, <span class="number">10545724654301013341</span>, <span class="number">10546172455216330452</span>, <span class="number">11240984669916837022</span>, <span class="number">10545724654285436249</span>, <span class="number">10546443563687526479</span>, <span class="number">10546443564050351795</span>, <span class="number">10907434497455461159</span>, <span class="number">10546172455222804231</span>, <span class="number">11240984669916837546</span>, <span class="number">10546172455151212229</span>, <span class="number">10546443563686270699</span>, <span class="number">10546443563871165962</span>, <span class="number">10545724654285431400</span>, <span class="number">10546050787357371216</span>, <span class="number">10546172455177450556</span>, <span class="number">10907434497432600071</span>, <span class="number">10546443563928563347</span>, <span class="number">11240984669916922041</span>, <span class="number">10691192243899167765</span>, <span class="number">10546443563789742975</span>, <span class="number">10546443564017185040</span>, <span class="number">11240984669916836546</span>, <span class="number">10545724654285435318</span>, <span class="number">10907434497477711336</span>, <span class="number">10545724654285430464</span>, <span class="number">10545724654285430975</span>, <span class="number">10546050787357375177</span>, <span class="number">10545724654301013166</span>, <span class="number">10546172455177449497</span>, <span class="number">10907434497420630891</span>, <span class="number">10546050787357374387</span>, <span class="number">10907434497378599148</span>, <span class="number">10907434497319569762</span>, <span class="number">10907434497465670838</span>, <span class="number">11240984669916899548</span>, <span class="number">10907434497472394386</span>, <span class="number">10546443563665237491</span>, <span class="number">10907434497490337095</span>, <span class="number">10907434497475453784</span>, <span class="number">10546443563665242864</span>, <span class="number">10546443563712177468</span>, <span class="number">10546443564052747737</span>, <span class="number">10546443563661313351</span>, <span class="number">10546443563828292153</span>, <span class="number">10907434497341571632</span>, <span class="number">11240984669917037033</span>, <span class="number">10546050787357372333</span>, <span class="number">10546443563745965622</span>, <span class="number">10545724654285434536</span>, <span class="number">10546172455151212939</span>, <span class="number">10546172455169450621</span>, <span class="number">10907434497475442254</span>, <span class="number">10546443563918994915</span>, <span class="number">10546050787355528368</span>, <span class="number">11240984669916877048</span>, <span class="number">11240984669916907516</span>)</span><br><span class="line">    <span class="keyword">or</span> car_id_own_org <span class="keyword">in</span>(<span class="number">10546172455175872464</span>, <span class="number">10907434497490929133</span>, <span class="number">10546443563656228053</span>, <span class="number">10546443563688497585</span>, <span class="number">11240984669917035533</span>, <span class="number">11240984669916854029</span>, <span class="number">11240984669917046024</span>, <span class="number">11240984669917046025</span>, <span class="number">10907434497444308271</span>, <span class="number">10546172455159754217</span>, <span class="number">10546050787350194851</span>, <span class="number">10545724654285435665</span>, <span class="number">10546443563727532329</span>, <span class="number">10546443563681314151</span>, <span class="number">10545724654285433611</span>, <span class="number">10545724654301013514</span>, <span class="number">10546443563674535370</span>, <span class="number">10546443563951056968</span>, <span class="number">10907434497418880888</span>, <span class="number">10907434497457246467</span>, <span class="number">10545724654297182142</span>, <span class="number">10546443563843224093</span>, <span class="number">10907434497420505040</span>, <span class="number">10907434497348682291</span>, <span class="number">10545724654285431864</span>, <span class="number">10545724654285432888</span>, <span class="number">10546050787350196051</span>, <span class="number">10907434497357402047</span>, <span class="number">10907434497470850803</span>, <span class="number">10546172455222800352</span>, <span class="number">10907434497378606711</span>, <span class="number">11240984669916797520</span>, <span class="number">11240984669917045590</span>, <span class="number">10545724654285433927</span>, <span class="number">10545724654294798264</span>, <span class="number">11240984669917045591</span>, <span class="number">10545724654285435972</span>, <span class="number">10546172455177448351</span>, <span class="number">10907434497493913040</span>, <span class="number">10546172455169452312</span>, <span class="number">10546443563693481390</span>, <span class="number">10691192243927853249</span>, <span class="number">10545724654300417571</span>, <span class="number">10546050787357371709</span>, <span class="number">10907434497334641736</span>, <span class="number">10546443564050948214</span>, <span class="number">10546443563706648555</span>, <span class="number">10546443564025546476</span>, <span class="number">10546443563701603420</span>, <span class="number">10907434497355836924</span>, <span class="number">10546443563765241972</span>, <span class="number">11240984669916906091</span>, <span class="number">10546050787350196607</span>, <span class="number">10546443563730997650</span>, <span class="number">10546443563808717302</span>, <span class="number">10546443563656232700</span>, <span class="number">11240984669917044087</span>, <span class="number">11240984669917034608</span>, <span class="number">10546443563682941047</span>, <span class="number">10546443563951281274</span>, <span class="number">11240984669916926586</span>, <span class="number">10545724654285437233</span>, <span class="number">10907434497435970332</span>, <span class="number">10545724654284683060</span>, <span class="number">11240984669917044088</span>, <span class="number">10907434497450373186</span>, <span class="number">10545724654285432442</span>, <span class="number">11240984669916795520</span>, <span class="number">10545724654285436537</span>, <span class="number">10907434497415854333</span>, <span class="number">10907434497301174552</span>, <span class="number">10545724654290417360</span>, <span class="number">10546443563673467473</span>, <span class="number">11240984669917044619</span>, <span class="number">10545724654285436809</span>, <span class="number">10546443563743386482</span>, <span class="number">10907434497311671722</span>, <span class="number">10907434497409259937</span>, <span class="number">10545724654285435012</span>, <span class="number">10545724654285433232</span>, <span class="number">10545724654301013341</span>, <span class="number">10546172455216330452</span>, <span class="number">11240984669916837022</span>, <span class="number">10545724654285436249</span>, <span class="number">10546443563687526479</span>, <span class="number">10546443564050351795</span>, <span class="number">10907434497455461159</span>, <span class="number">10546172455222804231</span>, <span class="number">11240984669916837546</span>, <span class="number">10546172455151212229</span>, <span class="number">10546443563686270699</span>, <span class="number">10546443563871165962</span>, <span class="number">10545724654285431400</span>, <span class="number">10546050787357371216</span>, <span class="number">10546172455177450556</span>, <span class="number">10907434497432600071</span>, <span class="number">10546443563928563347</span>, <span class="number">11240984669916922041</span>, <span class="number">10691192243899167765</span>, <span class="number">10546443563789742975</span>, <span class="number">10546443564017185040</span>, <span class="number">11240984669916836546</span>, <span class="number">10545724654285435318</span>, <span class="number">10907434497477711336</span>, <span class="number">10545724654285430464</span>, <span class="number">10545724654285430975</span>, <span class="number">10546050787357375177</span>, <span class="number">10545724654301013166</span>, <span class="number">10546172455177449497</span>, <span class="number">10907434497420630891</span>, <span class="number">10546050787357374387</span>, <span class="number">10907434497378599148</span>, <span class="number">10907434497319569762</span>, <span class="number">10907434497465670838</span>, <span class="number">11240984669916899548</span>, <span class="number">10907434497472394386</span>, <span class="number">10546443563665237491</span>, <span class="number">10907434497490337095</span>, <span class="number">10907434497475453784</span>, <span class="number">10546443563665242864</span>, <span class="number">10546443563712177468</span>, <span class="number">10546443564052747737</span>, <span class="number">10546443563661313351</span>, <span class="number">10546443563828292153</span>, <span class="number">10907434497341571632</span>, <span class="number">11240984669917037033</span>, <span class="number">10546050787357372333</span>, <span class="number">10546443563745965622</span>, <span class="number">10545724654285434536</span>, <span class="number">10546172455151212939</span>, <span class="number">10546172455169450621</span>, <span class="number">10907434497475442254</span>, <span class="number">10546443563918994915</span>, <span class="number">10546050787355528368</span>, <span class="number">11240984669916877048</span>, <span class="number">11240984669916907516</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-2、数据"><a href="#1-2、数据" class="headerlink" title="1.2、数据"></a>1.2、数据</h2><h3 id="1-2-1、服务提醒"><a href="#1-2-1、服务提醒" class="headerlink" title="1.2.1、服务提醒"></a>1.2.1、服务提醒</h3><ul>
+<li><strong>每周</strong>慢查询<strong>249条</strong>，平均耗时<strong>1.3s</strong>。</li>
+<li>10545724654284683189（兔师傅）、10546050787360507919（西安恒泰汽车服务有限公司）、10545511425563128304(一番车道) 这三家公司触发慢查询次数最多。</li>
+<li>RemindBillReadFacade@queryRemindBillCount 近<strong>三个月</strong>平均响应时间：<strong>12.7ms</strong> 请求数：<strong>928.3K</strong></li>
+<li>RemindBillReadFacade@queryRemindBillUnCompletedCount 近<strong>三个月</strong>平均响应时间：<strong>68.3ms</strong> 请求数：<strong>374.8K</strong></li>
+<li>ServiceRemindBillReadFacade@queryServiceRemindBillList 近<strong>三个月</strong>平均响应时间：<strong>28.7ms</strong> 请求数：<strong>101.05K</strong></li>
+<li>服务提醒单<strong>现有</strong>数量：2464000条（百万级别）、服务提醒单操作日志<strong>现有</strong>数量：2371677条（百万级别）</li>
+<li>服务提醒单<strong>每日新增</strong>数量：5096条（千级别）、服务提醒单操作日志<strong>每日新增</strong>数量：10022条（万级别）</li>
+</ul>
+<p>从上面数据可以看出，本次优化主要解决兔师傅等门店较多的大客户的用户体验问题。</p>
+<h3 id="1-2-2、未迁移提醒数据"><a href="#1-2-2、未迁移提醒数据" class="headerlink" title="1.2.2、未迁移提醒数据"></a>1.2.2、未迁移提醒数据</h3><ul>
+<li>保险提醒<strong>现有</strong>数据：2678857条（百万级别），<strong>每日增量</strong>：10246条（万级别）</li>
+<li>特殊人群提醒<strong>现有</strong>数据：9695180条（近千万级别），<strong>每日增量</strong>：100354条（十万级别）</li>
+</ul>
+<p>如果所有提醒都迁移完成后，数据量剧增，到时候必须要做分库分表和对接ES,否则可能会影响正常的功能使用。</p>
+<h3 id="1-2-3、根据groupId分表后提醒单数据"><a href="#1-2-3、根据groupId分表后提醒单数据" class="headerlink" title="1.2.3、根据groupId分表后提醒单数据"></a>1.2.3、根据groupId分表后提醒单数据</h3><table>
+<thead>
+<tr>
+<th>group_id</th>
+<th>服务提醒单数量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>10545724654284683189</strong></td>
+<td><strong>327544</strong></td>
+</tr>
+<tr>
+<td>10546172455174347299</td>
+<td>74656</td>
+</tr>
+<tr>
+<td><strong>10545511425563128304</strong></td>
+<td><strong>51467</strong></td>
+</tr>
+<tr>
+<td><strong>10546050787360507919</strong></td>
+<td><strong>42275</strong></td>
+</tr>
+<tr>
+<td>10545360219000198060</td>
+<td>37992</td>
+</tr>
+<tr>
+<td>10546172455173835772</td>
+<td>32988</td>
+</tr>
+<tr>
+<td>10546443563683618514</td>
+<td>28356</td>
+</tr>
+<tr>
+<td>10546050787353579790</td>
+<td>22154</td>
+</tr>
+<tr>
+<td>10545511425564218169</td>
+<td>17932</td>
+</tr>
+<tr>
+<td>10546172455150344939</td>
+<td>12469</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>id_own_group</th>
+<th>保险提醒单数量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>10546050787360507919</strong></td>
+<td><strong>149208</strong></td>
+</tr>
+<tr>
+<td>10546443563846901705</td>
+<td>147508</td>
+</tr>
+<tr>
+<td><strong>10545511425563128304</strong></td>
+<td><strong>101822</strong></td>
+</tr>
+<tr>
+<td>10546172455173835772</td>
+<td>88605</td>
+</tr>
+<tr>
+<td>10545360219000198060</td>
+<td>73165</td>
+</tr>
+<tr>
+<td>10546172455216487588</td>
+<td>63005</td>
+</tr>
+<tr>
+<td>10546172455174347299</td>
+<td>59283</td>
+</tr>
+<tr>
+<td>10546443563834764203</td>
+<td>38264</td>
+</tr>
+<tr>
+<td>10546050787353579790</td>
+<td>28588</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>id_own_group</th>
+<th>特殊人群提醒单数量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>10545055917999668983</td>
+<td>2174549</td>
+</tr>
+<tr>
+<td>10546443563846901705</td>
+<td>1884708</td>
+</tr>
+<tr>
+<td>10545360219000198060</td>
+<td>1078077</td>
+</tr>
+<tr>
+<td>10545435426611755185</td>
+<td>511770</td>
+</tr>
+<tr>
+<td>10546443563710234093</td>
+<td>356497</td>
+</tr>
+<tr>
+<td>10546443563713262850</td>
+<td>247156</td>
+</tr>
+<tr>
+<td>10546443563754919092</td>
+<td>243911</td>
+</tr>
+<tr>
+<td>10546443563959457579</td>
+<td>209337</td>
+</tr>
+<tr>
+<td>10546172455194190154</td>
+<td>182971</td>
+</tr>
+</tbody></table>
+<h1 id="2、问题解决价值"><a href="#2、问题解决价值" class="headerlink" title="2、问题解决价值"></a>2、问题解决价值</h1><h2 id="1-1、实际客户价值"><a href="#1-1、实际客户价值" class="headerlink" title="1.1、实际客户价值"></a>1.1、实际客户价值</h2><ul>
+<li>优化兔师傅等门店较多客户的用户体验，进入营销看板及服务提醒页面速度快，体验好。</li>
+<li>所有提醒数据模型统一后，可以深挖数据，创造对客户更有价值的信息。</li>
+<li>提醒单数据量特别多时，不影响客户正常使用提醒功能</li>
+</ul>
+<p>统一模型后深挖数据例子：</p>
+<p>客户快过生日了，且有个保养需要提醒，这时候可以给客户定制化提醒：比如因为客户生日快到了，专门为他定了了一个活动，来保养送xxx套餐卡之类。</p>
+<h2 id="1-2、研发团队价值"><a href="#1-2、研发团队价值" class="headerlink" title="1.2、研发团队价值"></a>1.2、研发团队价值</h2><ul>
+<li>解决慢查询问题，提升mysql巡检得分</li>
+<li>所有提醒数据模型统一，便于管理</li>
+<li>提醒数据量增大后，不用因为优化接口问题而浪费开发人力资源</li>
+</ul>
+<h1 id="3、两个解决方案对比"><a href="#3、两个解决方案对比" class="headerlink" title="3、两个解决方案对比"></a>3、两个解决方案对比</h1><h2 id="3-1、分库分表"><a href="#3-1、分库分表" class="headerlink" title="3.1、分库分表"></a>3.1、分库分表</h2><h3 id="3-1-1、优点"><a href="#3-1-1、优点" class="headerlink" title="3.1.1、优点"></a>3.1.1、优点</h3><ul>
+<li>代码侵入性小，改动小，测试范围小。</li>
+<li>提醒单数量查询效率提升</li>
+<li>提醒单列表查询效率提升</li>
+</ul>
+<h3 id="3-1-2、缺点"><a href="#3-1-2、缺点" class="headerlink" title="3.1.2、缺点"></a>3.1.2、缺点</h3><ul>
+<li>按照公司分表，门店多的公司数据过多，数据倾斜。</li>
+<li>所有提醒迁移完成后，数据量剧增，查询提醒单会有性能风险。</li>
+<li>数据迁移问题</li>
+<li>兔师傅等拥有门店比较多的客户，对于标题1的问题，依然解决不了。</li>
+<li></li>
+</ul>
+<h2 id="3-2、对接ES"><a href="#3-2、对接ES" class="headerlink" title="3.2、对接ES"></a>3.2、对接ES</h2><h3 id="3-2-1、优点"><a href="#3-2-1、优点" class="headerlink" title="3.2.1、优点"></a>3.2.1、优点</h3><ul>
+<li>所有提醒迁移完成后，数据量剧增，查询提醒单性能不会影响太大</li>
+<li>ES大数据量数据统计性能较好</li>
+<li>提醒单查询时，附加信息不必重新查询操作日志获取，可以直接走es,查询效率应有明显提升。</li>
+<li>对于问题1，对于or查询支持较好，可解决问题。</li>
+</ul>
+<h3 id="3-2-2、缺点"><a href="#3-2-2、缺点" class="headerlink" title="3.2.2、缺点"></a>3.2.2、缺点</h3><ul>
+<li>学习成本高</li>
+<li>代码侵入性大，改动大，测试范围大。</li>
+<li>查询接口改造</li>
+<li></li>
+</ul>
+<h3 id="3-2-3、mapper查询语句改造分析"><a href="#3-2-3、mapper查询语句改造分析" class="headerlink" title="3.2.3、mapper查询语句改造分析"></a>3.2.3、mapper查询语句改造分析</h3><h4 id="3-2-3-1、分库分表"><a href="#3-2-3-1、分库分表" class="headerlink" title="3.2.3.1、分库分表"></a>3.2.3.1、分库分表</h4><p>不做service改动 只修改mapper查询语句，在mapper层切换分库分表数据源</p>
+<p>需排查提醒单相关sql,Sharding-JDBC的语法并不是支持所有普通JDBC的语法,参考：<a target="_blank" rel="noopener" href="https://shardingsphere.apache.org/document/legacy/4.x/document/cn/features/sharding/use-norms/sql/">https://shardingsphere.apache.org/document/legacy/4.x/document/cn/features/sharding/use-norms/sql/</a></p>
+<h4 id="3-2-3-2、对接ES"><a href="#3-2-3-2、对接ES" class="headerlink" title="3.2.3.2、对接ES"></a>3.2.3.2、对接ES</h4><p>首先根据条件查询es，获取返回的提醒单主键id等，批量查询信息。原有接口出入参不变，需要改动service。</p>
+<h4 id="3-2-3-3、分析"><a href="#3-2-3-3、分析" class="headerlink" title="3.2.3.3、分析"></a>3.2.3.3、分析</h4><p>1）如果先分库分表，<strong>修改mapper，切换代理</strong>。比如:</p>
+<p>还需修改Sharding-JDBC不支持的语法。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> a,b,c <span class="keyword">from</span> reming_bill <span class="keyword">where</span> id_own_org <span class="keyword">in</span> (xxx) <span class="operator">/</span><span class="operator">/</span>走分库分表逻辑</span><br></pre></td></tr></table></figure>
+
+<p>再对接es,需要<strong>新增mapper，原有的sql废弃</strong>，比如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> c <span class="keyword">from</span> reming_bill <span class="keyword">where</span> id <span class="keyword">in</span> (xxx) <span class="operator">/</span><span class="operator">/</span>走分库分表逻辑</span><br></pre></td></tr></table></figure>
+
+<p>其中查询的a,b从搜索中获取，c从数据库获取。</p>
+<p>2）如果先接es,<strong>新增mapper</strong>。比如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> c <span class="keyword">from</span> reming_bill <span class="keyword">where</span> id <span class="keyword">in</span> (xxx)  <span class="operator">/</span><span class="operator">/</span>走单表逻辑</span><br></pre></td></tr></table></figure>
+
+<p>再分库分表，<strong>切换代理，sql不必修改。</strong></p>
+<h1 id="4、优化思路"><a href="#4、优化思路" class="headerlink" title="4、优化思路"></a>4、优化思路</h1><p>根据第3步分析，短期内，先做分库分表可以提升各种查询的效率，且改动范围小，影响范围也小。</p>
+<p>但是不能解决标题1的问题，目前服务提醒单每天增量数据5千，分表意义不是很大。</p>
+<p>对接ES虽然耗时长，但是能解决现有问题（兔师傅查询耗时太长）。</p>
+<p>对于代码改造，如果先分库分表再对接ES,mapper层需要改两次，如果先对接es，再分库分表，mapper层只需要改一次。</p>
+<p><strong>因为马上要在提醒的基础上做商机，所以表结构难免会修改，商机做完，预计提醒单数据也就达到300万，所以分库分表可以先不做。</strong></p>
+<p><strong>对接搜索应该提前做，否则做商机的时候开发工作量太大，对接搜索时间太紧张。</strong></p>
+<p>所以提醒单优化计划分两步走：首先对接ES，之后分库分表。</p>
+<p><strong>如果先对接ES,写新的mapper时，需注意Sharding-JDBC的语法并不是支持所有普通JDBC的语法，要提前了解，规避。</strong></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://clawhub.github.io">ClawHub</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://clawhub.github.io/2022/06/28/%E4%B8%9A%E5%8A%A1%E6%A2%B3%E7%90%86/%E6%8F%90%E9%86%92%E5%8D%95%E5%AF%B9%E6%8E%A5ES%E4%B8%8E%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E5%88%86%E6%9E%90/">https://clawhub.github.io/2022/06/28/%E4%B8%9A%E5%8A%A1%E6%A2%B3%E7%90%86/%E6%8F%90%E9%86%92%E5%8D%95%E5%AF%B9%E6%8E%A5ES%E4%B8%8E%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E5%88%86%E6%9E%90/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://clawhub.github.io" target="_blank">ClawHub的技术分享</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E4%B8%9A%E5%8A%A1%E6%A2%B3%E7%90%86/">业务梳理</a><a class="post-meta__tags" href="/tags/%E5%95%86%E6%9C%BA%E6%8F%90%E9%86%92/">商机提醒</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/ClawHub/image/image/photo-1695749787631-644ada7d5892%3Fcrop%3Dentropy%26cs%3Dtinysrgb%26fit%3Dcrop%26fm%3Djpg%26h%3D900%26ixid%3DMnwxfDB8MXxyYW5kb218MHxjb2xsZWN0aW9uaWR8fHx8fHx8MTY5NzI4MjU0NA%26ixlib%3Drb-4.0.jpeg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/06/28/%E5%B8%B8%E7%94%A8%E6%A1%86%E6%9E%B6/J2Cache/LettuceConnectionFactory%E8%8E%B7%E5%8F%96%E8%BF%9E%E6%8E%A5%E5%88%86%E6%9E%90/" title="LettuceConnectionFactory获取连接分析"><img class="cover" src="https://cdn.jsdelivr.net/gh/ClawHub/image/image/photo-1694630737405-f27394b91824%3Fcrop%3Dentropy%26cs%3Dtinysrgb%26fit%3Dcrop%26fm%3Djpg%26h%3D900%26ixid%3DMnwxfDB8MXxyYW5kb218MHxjb2xsZWN0aW9uaWR8fHx8fHx8MTY5NzExNTUxOQ%26ixlib%3Drb-4.0.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">LettuceConnectionFactory获取连接分析</div></div></a></div><div class="next-post pull-right"><a href="/2022/06/28/%E4%B8%9A%E5%8A%A1%E6%A2%B3%E7%90%86/%E6%9C%8D%E5%8A%A1%E6%8F%90%E9%86%92%E5%8D%95%E5%AF%B9%E6%8E%A5%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E6%97%B6%E7%9A%84%E5%87%86%E5%A4%87/" title="服务提醒单对接搜索引擎时的准备"><img class="cover" src="https://source.unsplash.com/collection/collectionid/1600x900" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">服务提醒单对接搜索引擎时的准备</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/09/23/%E4%B8%9A%E5%8A%A1%E6%A2%B3%E7%90%86/%E4%BB%8E%E6%9C%8D%E5%8A%A1%E6%8F%90%E9%86%92%E5%8D%95%E4%BA%86%E8%A7%A3%E5%95%86%E6%9C%BA%E6%8F%90%E9%86%92%E4%B8%9A%E5%8A%A1/" title="从服务提醒单了解商机提醒业务"><img class="cover" src="https://cdn.jsdelivr.net/gh/ClawHub/image/image/photo-1694968459691-eaae662c9d19%3Fcrop%3Dentropy%26cs%3Dtinysrgb%26fit%3Dcrop%26fm%3Djpg%26h%3D900%26ixid%3DMnwxfDB8MXxyYW5kb218MHxjb2xsZWN0aW9uaWR8fHx8fHx8MTY5NzI4MjE5Mg%26ixlib%3Drb-4.0.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-23</div><div class="title">从服务提醒单了解商机提醒业务</div></div></a></div><div><a href="/2022/06/28/%E4%B8%9A%E5%8A%A1%E6%A2%B3%E7%90%86/%E6%9C%8D%E5%8A%A1%E6%8F%90%E9%86%92%E5%8D%95%E5%AF%B9%E6%8E%A5%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E6%97%B6%E7%9A%84%E5%87%86%E5%A4%87/" title="服务提醒单对接搜索引擎时的准备"><img class="cover" src="https://source.unsplash.com/collection/collectionid/1600x900" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-28</div><div class="title">服务提醒单对接搜索引擎时的准备</div></div></a></div><div><a href="/2023/10/16/%E4%B8%9A%E5%8A%A1%E6%A2%B3%E7%90%86/%E4%BB%8E%E6%81%B6%E6%84%8F%E5%88%B7%E5%8D%95%E5%88%B0%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%B8%8B%E5%8D%95%E6%B5%81%E7%A8%8B%E4%BC%98%E5%8C%96/" title="从恶意刷单到小程序下单流程优化"><img class="cover" src="https://cdn.jsdelivr.net/gh/ClawHub/image/image/photo-1694588223548-0267f0cc2579%3Fcrop%3Dentropy%26cs%3Dtinysrgb%26fit%3Dcrop%26fm%3Djpg%26h%3D900%26ixid%3DMnwxfDB8MXxyYW5kb218MHxjb2xsZWN0aW9uaWR8fHx8fHx8MTY5NzQyNTk3MA%26ixlib%3Drb-4.0.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-16</div><div class="title">从恶意刷单到小程序下单流程优化</div></div></a></div><div><a href="/2023/09/27/%E4%B8%9A%E5%8A%A1%E6%A2%B3%E7%90%86/%E4%BB%8E%E7%BA%A2%E5%8C%85%E8%A3%82%E5%8F%98%E6%B4%BB%E5%8A%A8%E4%BA%86%E8%A7%A3%E6%B4%BB%E5%8A%A8%E4%B8%9A%E5%8A%A1/" title="从红包裂变活动了解活动业务"><img class="cover" src="https://cdn.jsdelivr.net/gh/ClawHub/image/image/photo-1694930104266-9cc1cd72163a%3Fcrop%3Dentropy%26cs%3Dtinysrgb%26fit%3Dcrop%26fm%3Djpg%26h%3D900%26ixid%3DMnwxfDB8MXxyYW5kb218MHxjb2xsZWN0aW9uaWR8fHx8fHx8MTY5NzE4MjkzNA%26ixlib%3Drb-4.0.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-27</div><div class="title">从红包裂变活动了解活动业务</div></div></a></div><div><a href="/2023/10/16/%E4%B8%9A%E5%8A%A1%E6%A2%B3%E7%90%86/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%95%86%E5%93%81%E5%BA%93%E5%AD%98%E5%8F%8A%E9%99%90%E8%B4%AD%E4%BC%98%E5%8C%96%E6%94%B9%E9%80%A0/" title="小程序商品库存及限购优化改造"><img class="cover" src="https://cdn.jsdelivr.net/gh/ClawHub/image/image/photo-1691135329867-22e18224472c%3Fcrop%3Dentropy%26cs%3Dtinysrgb%26fit%3Dcrop%26fm%3Djpg%26h%3D900%26ixid%3DMnwxfDB8MXxyYW5kb218MHxjb2xsZWN0aW9uaWR8fHx8fHx8MTY5NzQyNjExNg%26ixlib%3Drb-4.0.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-16</div><div class="title">小程序商品库存及限购优化改造</div></div></a></div><div><a href="/2023/10/16/%E4%B8%9A%E5%8A%A1%E6%A2%B3%E7%90%86/%E4%BB%A5%E7%B2%BE%E5%87%86%E8%90%A5%E9%94%80%E4%B8%BA%E4%BE%8B%E6%A2%B3%E7%90%86%E7%9F%AD%E4%BF%A1%E4%B8%9A%E5%8A%A1/" title="以精准营销为例梳理短信业务"><img class="cover" src="https://cdn.jsdelivr.net/gh/ClawHub/image/image/photo-1694871946326-244c61ab7f0c%3Fcrop%3Dentropy%26cs%3Dtinysrgb%26fit%3Dcrop%26fm%3Djpg%26h%3D900%26ixid%3DMnwxfDB8MXxyYW5kb218MHxjb2xsZWN0aW9uaWR8fHx8fHx8MTY5NzQ0MDM3Mw%26ixlib%3Drb-4.0.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-16</div><div class="title">以精准营销为例梳理短信业务</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/clawhub/image/blog/avatar.gif" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">ClawHub</div><div class="author-info__description">ClawHub的技术分享，记录学习中的点点滴滴！</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">383</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">67</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">46</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/clawhub" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:clawhub@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">奋斗！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E9%97%AE%E9%A2%98%E5%8F%8A%E6%95%B0%E6%8D%AE"><span class="toc-text">1、问题及数据</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2%E3%80%81%E6%95%B0%E6%8D%AE"><span class="toc-text">1.2、数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1%E3%80%81%E6%9C%8D%E5%8A%A1%E6%8F%90%E9%86%92"><span class="toc-text">1.2.1、服务提醒</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2%E3%80%81%E6%9C%AA%E8%BF%81%E7%A7%BB%E6%8F%90%E9%86%92%E6%95%B0%E6%8D%AE"><span class="toc-text">1.2.2、未迁移提醒数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-3%E3%80%81%E6%A0%B9%E6%8D%AEgroupId%E5%88%86%E8%A1%A8%E5%90%8E%E6%8F%90%E9%86%92%E5%8D%95%E6%95%B0%E6%8D%AE"><span class="toc-text">1.2.3、根据groupId分表后提醒单数据</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E4%BB%B7%E5%80%BC"><span class="toc-text">2、问题解决价值</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1%E3%80%81%E5%AE%9E%E9%99%85%E5%AE%A2%E6%88%B7%E4%BB%B7%E5%80%BC"><span class="toc-text">1.1、实际客户价值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2%E3%80%81%E7%A0%94%E5%8F%91%E5%9B%A2%E9%98%9F%E4%BB%B7%E5%80%BC"><span class="toc-text">1.2、研发团队价值</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81%E4%B8%A4%E4%B8%AA%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E5%AF%B9%E6%AF%94"><span class="toc-text">3、两个解决方案对比</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1%E3%80%81%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8"><span class="toc-text">3.1、分库分表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-1%E3%80%81%E4%BC%98%E7%82%B9"><span class="toc-text">3.1.1、优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-2%E3%80%81%E7%BC%BA%E7%82%B9"><span class="toc-text">3.1.2、缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2%E3%80%81%E5%AF%B9%E6%8E%A5ES"><span class="toc-text">3.2、对接ES</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-1%E3%80%81%E4%BC%98%E7%82%B9"><span class="toc-text">3.2.1、优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-2%E3%80%81%E7%BC%BA%E7%82%B9"><span class="toc-text">3.2.2、缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-3%E3%80%81mapper%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5%E6%94%B9%E9%80%A0%E5%88%86%E6%9E%90"><span class="toc-text">3.2.3、mapper查询语句改造分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-3-1%E3%80%81%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8"><span class="toc-text">3.2.3.1、分库分表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-3-2%E3%80%81%E5%AF%B9%E6%8E%A5ES"><span class="toc-text">3.2.3.2、对接ES</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-3-3%E3%80%81%E5%88%86%E6%9E%90"><span class="toc-text">3.2.3.3、分析</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4%E3%80%81%E4%BC%98%E5%8C%96%E6%80%9D%E8%B7%AF"><span class="toc-text">4、优化思路</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/10/16/%E4%B8%9A%E5%8A%A1%E6%A2%B3%E7%90%86/%E4%BB%A5%E7%B2%BE%E5%87%86%E8%90%A5%E9%94%80%E4%B8%BA%E4%BE%8B%E6%A2%B3%E7%90%86%E7%9F%AD%E4%BF%A1%E4%B8%9A%E5%8A%A1/" title="以精准营销为例梳理短信业务"><img src="https://cdn.jsdelivr.net/gh/ClawHub/image/image/photo-1694871946326-244c61ab7f0c%3Fcrop%3Dentropy%26cs%3Dtinysrgb%26fit%3Dcrop%26fm%3Djpg%26h%3D900%26ixid%3DMnwxfDB8MXxyYW5kb218MHxjb2xsZWN0aW9uaWR8fHx8fHx8MTY5NzQ0MDM3Mw%26ixlib%3Drb-4.0.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="以精准营销为例梳理短信业务"/></a><div class="content"><a class="title" href="/2023/10/16/%E4%B8%9A%E5%8A%A1%E6%A2%B3%E7%90%86/%E4%BB%A5%E7%B2%BE%E5%87%86%E8%90%A5%E9%94%80%E4%B8%BA%E4%BE%8B%E6%A2%B3%E7%90%86%E7%9F%AD%E4%BF%A1%E4%B8%9A%E5%8A%A1/" title="以精准营销为例梳理短信业务">以精准营销为例梳理短信业务</a><time datetime="2023-10-16T07:10:10.000Z" title="发表于 2023-10-16 15:10:10">2023-10-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/16/%E4%B8%9A%E5%8A%A1%E6%A2%B3%E7%90%86/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%95%86%E5%93%81%E5%BA%93%E5%AD%98%E5%8F%8A%E9%99%90%E8%B4%AD%E4%BC%98%E5%8C%96%E6%94%B9%E9%80%A0/" title="小程序商品库存及限购优化改造"><img src="https://cdn.jsdelivr.net/gh/ClawHub/image/image/photo-1691135329867-22e18224472c%3Fcrop%3Dentropy%26cs%3Dtinysrgb%26fit%3Dcrop%26fm%3Djpg%26h%3D900%26ixid%3DMnwxfDB8MXxyYW5kb218MHxjb2xsZWN0aW9uaWR8fHx8fHx8MTY5NzQyNjExNg%26ixlib%3Drb-4.0.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="小程序商品库存及限购优化改造"/></a><div class="content"><a class="title" href="/2023/10/16/%E4%B8%9A%E5%8A%A1%E6%A2%B3%E7%90%86/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%95%86%E5%93%81%E5%BA%93%E5%AD%98%E5%8F%8A%E9%99%90%E8%B4%AD%E4%BC%98%E5%8C%96%E6%94%B9%E9%80%A0/" title="小程序商品库存及限购优化改造">小程序商品库存及限购优化改造</a><time datetime="2023-10-16T03:14:41.000Z" title="发表于 2023-10-16 11:14:41">2023-10-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/16/%E4%B8%9A%E5%8A%A1%E6%A2%B3%E7%90%86/%E4%BB%8E%E6%81%B6%E6%84%8F%E5%88%B7%E5%8D%95%E5%88%B0%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%B8%8B%E5%8D%95%E6%B5%81%E7%A8%8B%E4%BC%98%E5%8C%96/" title="从恶意刷单到小程序下单流程优化"><img src="https://cdn.jsdelivr.net/gh/ClawHub/image/image/photo-1694588223548-0267f0cc2579%3Fcrop%3Dentropy%26cs%3Dtinysrgb%26fit%3Dcrop%26fm%3Djpg%26h%3D900%26ixid%3DMnwxfDB8MXxyYW5kb218MHxjb2xsZWN0aW9uaWR8fHx8fHx8MTY5NzQyNTk3MA%26ixlib%3Drb-4.0.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="从恶意刷单到小程序下单流程优化"/></a><div class="content"><a class="title" href="/2023/10/16/%E4%B8%9A%E5%8A%A1%E6%A2%B3%E7%90%86/%E4%BB%8E%E6%81%B6%E6%84%8F%E5%88%B7%E5%8D%95%E5%88%B0%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%B8%8B%E5%8D%95%E6%B5%81%E7%A8%8B%E4%BC%98%E5%8C%96/" title="从恶意刷单到小程序下单流程优化">从恶意刷单到小程序下单流程优化</a><time datetime="2023-10-16T03:10:15.000Z" title="发表于 2023-10-16 11:10:15">2023-10-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/27/%E4%B8%9A%E5%8A%A1%E6%A2%B3%E7%90%86/%E4%BB%8E%E7%BA%A2%E5%8C%85%E8%A3%82%E5%8F%98%E6%B4%BB%E5%8A%A8%E4%BA%86%E8%A7%A3%E6%B4%BB%E5%8A%A8%E4%B8%9A%E5%8A%A1/" title="从红包裂变活动了解活动业务"><img src="https://cdn.jsdelivr.net/gh/ClawHub/image/image/photo-1694930104266-9cc1cd72163a%3Fcrop%3Dentropy%26cs%3Dtinysrgb%26fit%3Dcrop%26fm%3Djpg%26h%3D900%26ixid%3DMnwxfDB8MXxyYW5kb218MHxjb2xsZWN0aW9uaWR8fHx8fHx8MTY5NzE4MjkzNA%26ixlib%3Drb-4.0.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="从红包裂变活动了解活动业务"/></a><div class="content"><a class="title" href="/2023/09/27/%E4%B8%9A%E5%8A%A1%E6%A2%B3%E7%90%86/%E4%BB%8E%E7%BA%A2%E5%8C%85%E8%A3%82%E5%8F%98%E6%B4%BB%E5%8A%A8%E4%BA%86%E8%A7%A3%E6%B4%BB%E5%8A%A8%E4%B8%9A%E5%8A%A1/" title="从红包裂变活动了解活动业务">从红包裂变活动了解活动业务</a><time datetime="2023-09-27T07:40:09.000Z" title="发表于 2023-09-27 15:40:09">2023-09-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/23/%E4%B8%9A%E5%8A%A1%E6%A2%B3%E7%90%86/%E4%BB%8E%E6%9C%8D%E5%8A%A1%E6%8F%90%E9%86%92%E5%8D%95%E4%BA%86%E8%A7%A3%E5%95%86%E6%9C%BA%E6%8F%90%E9%86%92%E4%B8%9A%E5%8A%A1/" title="从服务提醒单了解商机提醒业务"><img src="https://cdn.jsdelivr.net/gh/ClawHub/image/image/photo-1694968459691-eaae662c9d19%3Fcrop%3Dentropy%26cs%3Dtinysrgb%26fit%3Dcrop%26fm%3Djpg%26h%3D900%26ixid%3DMnwxfDB8MXxyYW5kb218MHxjb2xsZWN0aW9uaWR8fHx8fHx8MTY5NzI4MjE5Mg%26ixlib%3Drb-4.0.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="从服务提醒单了解商机提醒业务"/></a><div class="content"><a class="title" href="/2023/09/23/%E4%B8%9A%E5%8A%A1%E6%A2%B3%E7%90%86/%E4%BB%8E%E6%9C%8D%E5%8A%A1%E6%8F%90%E9%86%92%E5%8D%95%E4%BA%86%E8%A7%A3%E5%95%86%E6%9C%BA%E6%8F%90%E9%86%92%E4%B8%9A%E5%8A%A1/" title="从服务提醒单了解商机提醒业务">从服务提醒单了解商机提醒业务</a><time datetime="2023-09-23T11:14:07.000Z" title="发表于 2023-09-23 19:14:07">2023-09-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2023 By ClawHub</div><div class="footer_custom_text">好好学习 天天向上</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div></body></html>
